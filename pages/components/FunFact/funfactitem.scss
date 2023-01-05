@@ -1,0 +1,35 @@
+@import "../../scss/default/color_variable";
+.cs-funfact.cs-style1 {
+  display: flex;
+  align-items: center;
+  .cs-funfact_number {
+    margin: 0 13px 0 0;
+    font-size: 50px;
+    line-height: 1.3em;
+  }
+  .cs-funfact_text {
+    span {
+      font-size: 20px;
+      font-weight: 700;
+      display: block;
+      margin-top: -4px;
+      margin-bottom: -1px;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1380px) {
+  .cs-funfact.cs-style1 {
+    .cs-funfact_number {
+      font-size: 42px;
+    }
+    .cs-funfact_text span {
+      font-size: 18px;
+      margin-top: -8px;
+      margin-bottom: -5px;
+    }
+  }
+}

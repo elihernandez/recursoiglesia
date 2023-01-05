@@ -1,0 +1,43 @@
+@import "../../scss/default/color_variable";
+// .cs-iconbox.cs-style1 {
+//   padding: 40px;
+//   .cs-iconbox_icon {
+//     padding: 4px 10px;
+//     display: inline-block;
+//     background: linear-gradient(90deg, rgba($accent, 0.3) 0%, transparent 95.61%);
+//   }
+//   &.cs-type1 {
+//     .cs-iconbox_icon {
+//       padding: 0;
+//       background: transparent;
+//     }
+//   }
+// }
+.cs-iconbox.cs-style1 {
+  max-width: 350px;
+  margin: auto;
+  .cs-iconbox_icon {
+    margin-bottom: 25px;
+  }
+  .cs-iconbox_title {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  .cs-iconbox_subtitle {
+    line-height: 1.75em;
+  }
+}
+@media screen and (max-width: 991px) {
+  .cs-iconbox.cs-style1 {
+    max-width: 100%;
+    .cs-iconbox_title {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+  }
+}
+@media screen and (max-width: 575px) {
+  // .cs-iconbox.cs-style1 {
+  //   padding: 30px;
+  // }
+}
