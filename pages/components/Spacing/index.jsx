@@ -1,6 +1,6 @@
 import React from 'react'
 import Div from '../Div'
-import './spacing.scss'
+// import './spacing.scss'
 
 export default function Spacing({lg, md}) {
   return (

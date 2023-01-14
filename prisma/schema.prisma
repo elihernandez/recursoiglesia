@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Artist {
+  id          String       @id @default(uuid())
+  name        String
+  imgUrl      String
+  multitracks Multitrack[]
+  albums      Album[]
+}
+
+model Album {
+  id          String       @id @default(uuid())
+  name        String
+  imgUrl      String
+  artistId    String?
+  artist      Artist?      @relation(fields: [artistId], references: [id])
+  multitracks Multitrack[]
+}
+
+model Multitrack {
+  id       String  @id @default(uuid())
+  name     String
+  url      String?
+  link     String?
+  album    Album?  @relation(fields: [albumId], references: [id])
+  albumId  String?
+  artist   Artist? @relation(fields: [artistId], references: [id])
+  artistId String?
+}
+
+model User {
+  id    String @id @default(uuid())
+  email String @unique()
+}

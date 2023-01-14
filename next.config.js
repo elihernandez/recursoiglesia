@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['mtracks.azureedge.net'],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
