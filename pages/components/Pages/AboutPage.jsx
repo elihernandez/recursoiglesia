@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { pageTitle } from '../../helper'
+import { pageTitle } from '../../helpers'
 import Cta from '../Cta'
 import FunFact from '../FunFact'
 import FunFactItem from '../FunFact/FunFactItem'
