@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from '@iconify/react';
-import './team.scss'
+// import './team.scss'
 import { Link } from 'react-router-dom';
 import Div from '../Div';
 

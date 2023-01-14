@@ -1,6 +1,6 @@
 import React from 'react'
 import Div from '../Div'
-import './funfactitem.scss'
+// import './funfactitem.scss'
 
 export default function FunFactItem({title, factNumber}) {
   return (

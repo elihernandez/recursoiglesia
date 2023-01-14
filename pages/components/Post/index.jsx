@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Div from '../Div'
-import './post.scss'
+// import './post.scss'
 
 export default function Post({url, src, alt, date, title}) {
   return (

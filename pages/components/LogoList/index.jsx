@@ -1,6 +1,6 @@
 import React from 'react'
 import Div from '../Div'
-import './logolist.scss'
+// import './logolist.scss'
 
 export default function LogoList() {
   const partnerLogos = [

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../Button'
 import Div from '../Div'
-import './post.scss'
+// import './post.scss'
 
 export default function PostStyle2({thumb, title, subtitle, date, category, categoryHref, href}) {
   return (

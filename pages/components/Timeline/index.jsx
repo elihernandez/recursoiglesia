@@ -1,6 +1,6 @@
 import React from 'react'
 import Div from '../Div'
-import './timeline.scss'
+// import './timeline.scss'
 
 export default function Timeline({columnData}) {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import Div from '../Div'
-import './movingtext.scss'
+// import './movingtext.scss'
 
 export default function MovingText({text}) {
   return (

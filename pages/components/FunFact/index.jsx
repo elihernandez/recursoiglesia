@@ -1,6 +1,6 @@
 import React from 'react'
 import Div from '../Div'
-import './funfact.scss'
+// import './funfact.scss'
 
 export default function FunFact({children, variant, title, subtitle}) {
   return (
