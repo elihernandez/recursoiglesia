@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { pageTitle } from '../../helper'
+import { pageTitle } from '../../helpers'
 import Card from '../Card'
 import Cta from '../Cta'
 import PageHeading from '../PageHeading'

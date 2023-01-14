@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { pageTitle } from '../../helper'
+import { pageTitle } from '../../helpers'
 import Cta from '../Cta'
 import PageHeading from '../PageHeading'
 import Div from '../Div'
@@ -7,18 +7,18 @@ import Spacing from '../Spacing'
 import SocialWidget from '../Widget/SocialWidget'
 
 export default function TeamDetails() {
-  pageTitle('Team Member');
+  pageTitle('Team Member')
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
   return (
     <>
-      <PageHeading 
+      <PageHeading
         title='Team Details'
         bgSrc='/images/team_hero_bg.jpeg'
         pageLinkText='Team Details'
       />
-      <Spacing lg='150' md='80'/>
+      <Spacing lg='150' md='80' />
       <Div className="container">
         <Div className="row align-items-center">
           <Div className="col-xl-5 col-lg-6">
@@ -27,7 +27,7 @@ export default function TeamDetails() {
             </Div>
           </Div>
           <Div className="col-lg-6 offset-xl-1">
-            <Spacing lg='0' md='45'/>
+            <Spacing lg='0' md='45' />
             <Div className="cs-Div_heading cs-style1">
               <h2 className="cs-Div_title">Melon Bulgery</h2>
               <Div className="cs-height_10 cs-height_lg_10" />
@@ -39,17 +39,17 @@ export default function TeamDetails() {
               <Div className="cs-height_25 cs-height_lg_20" />
               <p className="cs-m0">Ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit.</p>
               <Div className="cs-height_45 cs-height_lg_30" />
-              <SocialWidget/>
+              <SocialWidget />
             </Div>
           </Div>
         </Div>
       </Div>
-      <Spacing lg='150' md='80'/>
+      <Spacing lg='150' md='80' />
       <Div className="container">
-        <Cta 
-          title='Let’s disscuse make <br />something <i>cool</i> together' 
-          btnText='Apply For Meeting' 
-          btnLink='/contact' 
+        <Cta
+          title='Let’s disscuse make <br />something <i>cool</i> together'
+          btnText='Apply For Meeting'
+          btnLink='/contact'
           bgSrc='/images/cta_bg.jpeg'
         />
       </Div>

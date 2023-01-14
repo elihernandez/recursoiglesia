@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { pageTitle } from '../../helper'
+import { pageTitle } from '../../helpers'
 import Cta from '../Cta'
 import PageHeading from '../PageHeading'
 import Portfolio from '../Portfolio'
