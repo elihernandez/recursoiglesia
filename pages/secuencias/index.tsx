@@ -23,6 +23,7 @@ type stateProps = {
 export default function SecuenciasPage(props) {
     const router = useRouter()
     const timerRef = useRef(null)
+
     const queryPage: string = router.query?.page as string
     const querySearch: string = router.query?.search as string
 
@@ -119,7 +120,7 @@ export default function SecuenciasPage(props) {
                 pageLinkText='Secuencias'
             />
             <Spacing lg='40' md='40' />
-            <Div className="container">
+            <Div className="container" id="container">
                 <Div className="row">
                     <Div className="col-lg-12">
                         <Div className="cs-portfolio_1_heading">
@@ -147,7 +148,7 @@ export default function SecuenciasPage(props) {
                         </Div>
                     </Div>
                 </Div>
-                <Spacing lg='80' md='80' />
+                <Spacing lg='80' md='40' />
                 {isLoading
                     ?
                     <Div className="container">
@@ -176,8 +177,15 @@ const MultitracksList = ({ active, data, page, search }) => {
     return (
         <Div>
             <RecentPost title={search != '' ? `Resultados de '${search}'` : active} data={data?.multitracks} />
-            <Spacing lg='80' md='80' />
-            <Pagination pageActive={page ? parseInt(page) : 1} link={link} length={data?.count} searchText={search} />
+            <Spacing lg='80' md='40' />
+            {data?.count &&
+                <Pagination
+                    link={link}
+                    length={data.count}
+                    searchText={search}
+                    pageActive={page ? parseInt(page) : 1}
+                />
+            }
             <Spacing lg='40' md='40' />
         </Div>
     )

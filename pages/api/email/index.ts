@@ -1,4 +1,5 @@
 import { prisma } from 'api/config/db'
+import { transporter } from 'api/config/mailer'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -10,6 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     email: email
                 }
             })
+
+            await sendNewSuscriberEmail(user.email)
 
             res.status(200)
             res.json('El correo se registró correctamente.')
@@ -27,5 +30,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res
             .status(405)
             .json({ message: 'We only support POST' })
+    }
+}
+
+export async function sendNewSuscriberEmail(email: string) {
+    try {
+        console.log('email')
+        return await transporter.sendMail({
+            from: 'Recurso Iglesia',
+            to: process.env.EMAIL_AUTH_USER,
+            subject: 'Nuevo suscriptor',
+            html: `
+                    <div>
+                        <p>Hola, tienes un nuevo suscriptor.</p>
+                    </div>
+                   <div>
+                       <p>El correo ${email} se ha suscrito al newsletter.</p>
+                   </div>
+                `
+        })
+    } catch (e) {
+        console.log(e)
     }
 }

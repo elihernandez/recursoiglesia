@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
-import { limitPageMultitracks, maxPagesMultitracks } from 'api/helpers/constants'
+import { limitPageMultitracks } from 'api/helpers/constants'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
 
 interface Props {
     link: string
@@ -9,66 +9,71 @@ interface Props {
     length: number
 }
 
+const pageLimit = 5
+
 export default function Pagination({ pageActive, link, length, searchText }) {
-    const last: number = Math.ceil(length / limitPageMultitracks)
-    const [firstPage, setFirstPage] = useState<number>(1)
-    const [lastPage, setLastPage] = useState<number>(last)
-    const [pages, setPages] = useState<Array<number>>([])
-
-    useEffect(() => {
-        const p = []
-        for (let index = 1; index <= last; index++) {
-            p.push(index)
-        }
-        setPages(p)
-    }, [last])
-
-    // TODO: Terminar paginación cuando son más de 5 pages
-
-    const setNextPages = () => {
-        setFirstPage(firstPage + 5)
-        setLastPage(lastPage + 5)
-    }
+    const pageCount = Math.ceil(length / limitPageMultitracks)
 
     const getHref = (number: number) => {
-        if (searchText || searchText != '') {
-            return {
-                pathname: link,
-                query: {
-                    search: searchText,
-                    page: number == 1 ? 1 : number
-                }
-            }
-        } else {
-            return {
-                pathname: link,
-                query: {
-                    page: number == 1 ? 1 : number
-                }
-            }
+        const query = {
+            page: number == 1 ? 1 : number
         }
+
+        if (searchText || searchText != '') {
+            query['search'] = searchText
+        }
+
+        return {
+            pathname: link,
+            query: query
+        }
+    }
+
+
+    const PreviousLabel = () => {
+        if (pageActive === 1) {
+            return null
+        }
+
+        return <li>
+            <Link scroll={true} href={getHref(pageActive - 1)} className="cs-pagination_item cs-center">
+                <Icon icon="akar-icons:chevron-left" />
+            </Link>
+        </li>
+    }
+
+    const NextLabel = () => {
+        if (pageCount <= pageLimit) {
+            return null
+        }
+
+        return <li>
+            <Link scroll={true} href={getHref(pageActive + 1)} className="cs-pagination_item cs-center">
+                <Icon icon="akar-icons:chevron-right" />
+            </Link>
+        </li>
     }
 
     return (
-        <ul className="cs-pagination_box cs-center cs-white_color cs-mp0 cs-semi_bold">
-            {pages.map((number) =>
-                <li key={number}>
-                    <Link
-                        scroll={false}
-                        href={getHref(number)}
-                        className={`cs-pagination_item cs-center ${pageActive === number ? 'active' : ''}`}
-                    >
-                        {number}
-                    </Link>
-                </li>
-            )}
-            {/* {last > maxPagesMultitracks &&
-                <li>
-                    <Link onClick={setNextPages} href="#" className="cs-pagination_item cs-center">
-                        <Icon icon="akar-icons:chevron-right" />
-                    </Link>
-                </li>
-            } */}
-        </ul>
+        <>
+            <ReactPaginate
+                breakLabel=""
+                previousLabel={<PreviousLabel />}
+                nextLabel={<NextLabel />}
+                pageLabelBuilder={(page) => <Link
+                    scroll={true}
+                    href={getHref(page)}
+                    className={`cs-pagination_item cs-center ${pageActive === page ? 'active' : ''}`}>
+                    {page}
+                </Link>}
+                pageRangeDisplayed={pageLimit}
+                marginPagesDisplayed={0}
+                pageCount={pageCount}
+                forcePage={pageActive}
+                renderOnZeroPageCount={null}
+                activeClassName="active"
+                className="cs-pagination_box cs-center cs-white_color cs-mp0 cs-semi_bold"
+            />
+        </>
     )
 }
