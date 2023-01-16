@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import Div from '../components/Div'
-import PageHeading from '../components/PageHeading'
-import Portfolio from '../components/Portfolio'
-import SectionHeading from '../components/SectionHeading'
-import Spacing from '../components/Spacing'
+import Div from 'components/Div'
+import PageHeading from 'components/PageHeading'
+import Portfolio from 'components/Portfolio'
+import SectionHeading from 'components/SectionHeading'
+import Spacing from 'components/Spacing'
 
 export default function RecursosPage(props) {
 

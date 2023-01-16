@@ -1,13 +1,16 @@
-@import "../../scss/default/color_variable";
+@import "../../styles/scss/default/color_variable";
+
 .cs-portfolio_1_heading {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
+
   .cs-filter_menu {
     margin-bottom: 15px;
   }
 }
+
 .cs-portfolio.cs-style1,
 .cs-portfolio.cs-style2 {
   border-radius: 15px;
@@ -15,6 +18,7 @@
   position: relative;
   height: 500px;
   display: block;
+
   &::before {
     content: '';
     position: absolute;
@@ -26,16 +30,19 @@
     background-color: rgba($black, 0.4);
     transition: all 0.4s ease;
   }
+
   &:hover {
     &::before {
       opacity: 1;
     }
   }
+
   .cs-portfolio_bg {
     height: 100%;
     width: 100%;
     border-radius: inherit;
   }
+
   .cs-portfolio_info {
     height: 300px;
     width: 300px;
@@ -45,6 +52,7 @@
     left: -40px;
     position: absolute;
   }
+
   .cs-portfolio_info_bg {
     position: absolute;
     height: 100%;
@@ -53,18 +61,21 @@
     left: 0;
     top: 0;
   }
+
   .cs-portfolio_title {
     font-size: 22px;
     margin-bottom: 5px;
     position: relative;
     z-index: 2;
   }
+
   .cs-portfolio_subtitle {
     display: inline-block;
     position: relative;
     z-index: 2;
     padding-right: 30px;
     color: $secondary;
+
     &::after {
       content: '';
       height: 1px;
@@ -78,34 +89,41 @@
     }
   }
 }
+
 .cs-portfolio.cs-style2 {
   height: 465;
+
   img {
     width: 100%;
   }
+
   .cs-portfolio_info_bg {
     left: -50px;
     top: 50px;
     opacity: 0;
     transition: all 0.4s ease;
   }
+
   .cs-portfolio_title,
   .cs-portfolio_subtitle {
     top: 15px;
     opacity: 0;
     transition: all 0.4s ease;
   }
+
   &:hover {
     .cs-portfolio_info_bg {
       left: 0px;
       top: 0px;
       opacity: 1;
     }
+
     .cs-portfolio_title {
       top: 0px;
       opacity: 1;
       transition-delay: 0.2s;
     }
+
     .cs-portfolio_subtitle {
       top: 0px;
       opacity: 1;
@@ -115,24 +133,31 @@
 }
 
 @media screen and (max-width: 1550px) {
+
   .cs-portfolio.cs-style1,
   .cs-portfolio.cs-style2 {
     height: 450px;
   }
 }
+
 @media screen and (max-width: 1380px) {
+
   .cs-portfolio.cs-style1 .cs-portfolio_title,
   .cs-portfolio.cs-style2 .cs-portfolio_title {
     font-size: 20px;
   }
 }
+
 @media screen and (max-width: 991px) {
+
   .cs-portfolio.cs-style1,
   .cs-portfolio.cs-style2 {
     height: 380px;
   }
 }
+
 @media screen and (max-width: 575px) {
+
   .cs-portfolio.cs-style1,
   .cs-portfolio.cs-style2 {
     height: 380px;

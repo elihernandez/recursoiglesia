@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Div from '../Div'
-import { capitalizeFirstLetter } from 'pages/helpers/strings'
+import { capitalizeFirstLetter } from 'helpers/strings'
 import { Multitrack } from 'api/models/Multitrack'
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
     data: Array<Multitrack>
 }
 
-export default function RecentPost({ title, data }:Props) {
+export default function RecentPost({ title, data }: Props) {
     return (
         <>
             <h4 className="cs-sidebar_widget_title">{capitalizeFirstLetter(title)}</h4>

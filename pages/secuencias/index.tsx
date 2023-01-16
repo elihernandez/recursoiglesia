@@ -2,14 +2,14 @@ import { Multitrack } from 'api/models/Multitrack'
 import axios from 'axios'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Pagination from 'pages/components/Pagination'
+import Pagination from 'components/Pagination'
 import { useEffect, useRef, useState } from 'react'
-import Div from '../components/Div'
-import PageHeading from '../components/PageHeading'
-import SectionHeading from '../components/SectionHeading'
-import Spacing from '../components/Spacing'
-import RecentPost from '../components/Widget/RecentPost'
-import SearchWidget from '../components/Widget/SearchWidget'
+import Div from 'components/Div'
+import PageHeading from 'components/PageHeading'
+import SectionHeading from 'components/SectionHeading'
+import Spacing from 'components/Spacing'
+import RecentPost from 'components/Widget/RecentPost'
+import SearchWidget from 'components/Widget/SearchWidget'
 
 // const fetcher = url => axios.get(url).then(res => res.data)
 // const { data, isLoading } = useSWR(`api/secuencias/${page ? page : 1}`, fetcher)
@@ -165,11 +165,11 @@ export default function SecuenciasPage(props) {
     )
 }
 
-const MultitracksList = ({active, data, page, search}) => {
+const MultitracksList = ({ active, data, page, search }) => {
 
-    if(data?.multitracks.length === 0 && data?.count === 0){
+    if (data?.multitracks.length === 0 && data?.count === 0) {
         return <Div>
-            No se encontraron resultados {search != '' ? `para '${search}'` : ''} 
+            No se encontraron resultados {search != '' ? `para '${search}'` : ''}
         </Div>
     }
 
