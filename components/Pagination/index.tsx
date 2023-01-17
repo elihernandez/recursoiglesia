@@ -12,7 +12,7 @@ interface Props {
 const pageLimit = 5
 
 export default function Pagination({ pageActive, link, length, searchText }) {
-    const pageCount = Math.ceil(length / limitPageMultitracks)
+    const pageCount: number = Math.ceil(length / limitPageMultitracks)
 
     const getHref = (number: number) => {
         const query = {
@@ -43,7 +43,7 @@ export default function Pagination({ pageActive, link, length, searchText }) {
     }
 
     const NextLabel = () => {
-        if (pageCount <= pageLimit) {
+        if ((pageCount <= pageLimit) || (pageActive === pageCount)) {
             return null
         }
 
