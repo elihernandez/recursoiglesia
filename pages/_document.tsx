@@ -13,10 +13,11 @@ export default function Document(props) {
                 <Script id="google-analytics" strategy="afterInteractive">
                     {`
                         window.dataLayer = window.dataLayer || [];
-                        function gtag(){window.dataLayer.push(arguments);}
+                        function gtag(){dataLayer.push(arguments);}
                         gtag('js', new Date());
-
-                        gtag('config', '${process.env.GA_MEASUREMENT_ID}');
+                        gtag('config', '${process.env.GA_MEASUREMENT_ID}', {
+                            page_path: window.location.pathname,
+                        });
                     `}
                 </Script>
             </Head>
