@@ -18,6 +18,13 @@ export default function RecursosPage(props) {
             src: '/images/recursos_secuencias.jpg',
             category: 'secuencias'
         },
+        {
+            title: 'Plantillas de diseño',
+            subtitle: 'Ver recurso',
+            href: '/plantillas',
+            src: '/images/recursos_plantillas.jpg',
+            category: 'plantillas'
+        },
         // {
         //     title: 'Software',
         //     subtitle: 'Ver software',

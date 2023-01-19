@@ -24,6 +24,10 @@ export default function Footer({ copyrightText, logoSrc, logoAlt, text }) {
             title: 'Secuencias',
             href: '/secuencias'
         },
+        {
+            title: 'Plantillas de diseño',
+            href: '/plantillas'
+        },
         // {
         //     title: 'Software',
         //     href: '/service/service-details'

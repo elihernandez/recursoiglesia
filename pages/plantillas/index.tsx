@@ -1,25 +1,25 @@
-import { Multitrack } from 'api/models/Multitrack'
+import { Template } from 'api/models/Template'
 import axios from 'axios'
 import Div from 'components/Div'
 import PageHeading from 'components/PageHeading'
 import Pagination from 'components/Pagination'
 import SectionHeading from 'components/SectionHeading'
 import Spacing from 'components/Spacing'
-import RecentPost from 'components/Widget/RecentPost'
+import TemplatePost from 'components/Widget/TemplatePost'
 import SearchWidget from 'components/Widget/SearchWidget'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
-import { limitPageMultitracks } from 'api/helpers/constants'
+import { limitPageTemplates } from 'api/helpers/constants'
 
-const link = '/secuencias'
+const link = '/plantillas'
 
 type stateProps = {
-    multitracks: Array<Multitrack>,
+    multitracks: Array<Template>,
     count: number
 }
 
-export default function SecuenciasPage(props) {
+export default function PlantillasPage(props) {
     const router = useRouter()
     const timerRef = useRef(null)
 
@@ -86,9 +86,9 @@ export default function SecuenciasPage(props) {
             setIsLoading(true)
             let response
             if (!search) {
-                response = await axios.get(`api/secuencias/${page ? page : 1}`)
+                response = await axios.get(`api/plantillas/${page ? page : 1}`)
             } else {
-                response = await axios.get(`api/secuencias/${page ? page : 1}/${search}`)
+                response = await axios.get(`api/plantillas/${page ? page : 1}/${search}`)
             }
 
             setData(response.data)
@@ -108,15 +108,15 @@ export default function SecuenciasPage(props) {
     return (
         <>
             <Head>
-                <title>Secuencias | Multitracks</title>
-                <meta name="description" content="Secuencias gratis de muchos artistas como Gateway Worship, Elevation Worship, Upperroom, Toma Tu Lugar, Marco Barrientos, Barak, Miel San Marcos, Christine D'Clario, Bethel Music, Hillsong y más." />
+                <title>Plantillas de diseño | Design Templates</title>
+                <meta name="description" content="Plantillas de diseño para redes sociales, diapositivas, presentación de iglesias. " />
             </Head>
             <PageHeading
-                title='Secuencias'
+                title='Plantillas de diseño'
                 bgSrc='images/portfolio_hero_bg.jpeg'
                 pageLinkPrev='/recursos'
                 pageTextPrev='Recursos'
-                pageLinkText='Secuencias'
+                pageLinkText='Plantillas de diseño'
             />
             <Spacing lg='40' md='40' />
             <Div className="container" id="container">
@@ -125,7 +125,7 @@ export default function SecuenciasPage(props) {
                         <Div className="cs-portfolio_1_heading">
                             <Div className="col-12 col-sm-6 col-lg-8">
                                 <SectionHeading
-                                    title='Secuencias'
+                                    title='Plantillas'
                                     subtitle=''
                                 />
                             </Div>
@@ -158,16 +158,15 @@ export default function SecuenciasPage(props) {
                             </div>
                         </Div>
                     </Div>
-                    : <MultitracksList active={active} data={data} page={page} search={search} />
+                    : <TemplatesList active={active} data={data} page={page} search={search} />
                 }
             </Div>
         </>
     )
 }
 
-const MultitracksList = ({ active, data, page, search }) => {
-
-    if (data?.multitracks.length === 0 && data?.count === 0) {
+const TemplatesList = ({ active, data, page, search }) => {
+    if (data?.templates.length === 0 && data?.count === 0) {
         return <Div>
             No se encontraron resultados {search != '' ? `para '${search}'` : ''}
         </Div>
@@ -175,7 +174,7 @@ const MultitracksList = ({ active, data, page, search }) => {
 
     return (
         <Div>
-            <RecentPost title={search != '' ? `Resultados de '${search}'` : active} data={data?.multitracks} />
+            <TemplatePost title={search != '' ? `Resultados de '${search}'` : active} data={data?.templates} />
             <Spacing lg='80' md='40' />
             {data?.count &&
                 <Pagination
@@ -183,7 +182,7 @@ const MultitracksList = ({ active, data, page, search }) => {
                     length={data.count}
                     searchText={search}
                     pageActive={page ? parseInt(page) : 1}
-                    limit={limitPageMultitracks}
+                    limit={limitPageTemplates}
                 />
             }
             <Spacing lg='40' md='40' />

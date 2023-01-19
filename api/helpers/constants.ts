@@ -1,2 +1,2 @@
 export const limitPageMultitracks = 5
-export const maxPagesMultitracks = 3
+export const limitPageTemplates = 8

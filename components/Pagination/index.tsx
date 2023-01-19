@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react'
-import { limitPageMultitracks } from 'api/helpers/constants'
 import Link from 'next/link'
 import ReactPaginate from 'react-paginate'
 
@@ -9,10 +8,8 @@ interface Props {
     length: number
 }
 
-const pageLimit = 5
-
-export default function Pagination({ pageActive, link, length, searchText }) {
-    const pageCount: number = Math.ceil(length / limitPageMultitracks)
+export default function Pagination({ pageActive, link, length, searchText, limit }) {
+    const pageCount: number = Math.ceil(length / limit)
 
     const getHref = (number: number) => {
         const query = {
@@ -43,7 +40,7 @@ export default function Pagination({ pageActive, link, length, searchText }) {
     }
 
     const NextLabel = () => {
-        if ((pageCount <= pageLimit) || (pageActive === pageCount)) {
+        if ((pageCount <= limit) || (pageActive === pageCount)) {
             return null
         }
 
@@ -66,7 +63,7 @@ export default function Pagination({ pageActive, link, length, searchText }) {
                     className={`cs-pagination_item cs-center ${pageActive === page ? 'active' : ''}`}>
                     {page}
                 </Link>}
-                pageRangeDisplayed={pageLimit}
+                pageRangeDisplayed={limit}
                 marginPagesDisplayed={0}
                 pageCount={pageCount}
                 forcePage={pageActive}
