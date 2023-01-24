@@ -28,6 +28,10 @@ export default function Footer({ copyrightText, logoSrc, logoAlt, text }) {
             title: 'Plantillas de diseño',
             href: '/plantillas'
         },
+        {
+            title: 'Programas',
+            href: '/programas'
+        }
         // {
         //     title: 'Software',
         //     href: '/service/service-details'

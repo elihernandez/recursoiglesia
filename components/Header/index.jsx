@@ -43,6 +43,7 @@ export default function Header() {
                                                 <ul>
                                                     <li><Link href='/secuencias' onClick={() => setMobileToggle(false)}>Secuencias</Link></li>
                                                     <li><Link href='/plantillas' onClick={() => setMobileToggle(false)}>Plantillas de diseño</Link></li>
+                                                    <li><Link href='/programas' onClick={() => setMobileToggle(false)}>Programas</Link></li>
                                                     {/* <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Fuentes</Link></li>
                                                     <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Plantillas de diseño</Link></li>
                                                     <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Libros</Link></li>

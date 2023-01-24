@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@iconify/react": "4.0.0",
+    "@types/axios": "^0.14.0",
     "@types/node": "^18.11.18",
     "node-sass": "7.0.3",
     "prisma": "^4.8.1",
