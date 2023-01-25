@@ -25,6 +25,13 @@ export default function RecursosPage(props) {
             src: '/images/recursos_plantillas.jpg',
             category: 'plantillas'
         },
+        {
+            title: 'Programas',
+            subtitle: 'Ver recurso',
+            href: '/programas',
+            src: '/images/recursos_programas.jpg',
+            category: 'programas'
+        }
         // {
         //     title: 'Software',
         //     subtitle: 'Ver software',
