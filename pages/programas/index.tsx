@@ -6,6 +6,7 @@ import PageHeading from 'components/PageHeading'
 import Pagination from 'components/Pagination'
 import SectionHeading from 'components/SectionHeading'
 import Spacing from 'components/Spacing'
+import FagWidget from 'components/Widget/FaqWidget'
 import SearchWidget from 'components/Widget/SearchWidget'
 import SoftwarePost from 'components/Widget/SoftwarePost'
 import Head from 'next/head'
@@ -160,6 +161,7 @@ export default function ProgramasPage(props) {
                     </Div>
                     : <TemplatesList active={active} data={data} page={page} search={search} />
                 }
+                <FagWidget />
             </Div>
         </>
     )

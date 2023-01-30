@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { limitPageTemplates } from 'api/helpers/constants'
+import FagWidget from 'components/Widget/FaqWidget'
 
 const link = '/plantillas'
 
@@ -160,6 +161,7 @@ export default function PlantillasPage(props) {
                     </Div>
                     : <TemplatesList active={active} data={data} page={page} search={search} />
                 }
+                <FagWidget />
             </Div>
         </>
     )

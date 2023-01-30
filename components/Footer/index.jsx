@@ -32,18 +32,13 @@ export default function Footer({ copyrightText, logoSrc, logoAlt, text }) {
             title: 'Programas',
             href: '/programas'
         }
-        // {
-        //     title: 'Software',
-        //     href: '/service/service-details'
-        // },
-        // {
-        //     title: 'Fuentes',
-        //     href: '/service/service-details'
-        // },
-        // {
-        //     title: 'Plantillas de diseño',
-        //     href: '/service/service-details'
-        // }
+    ]
+
+    const menu = [
+        {
+            title: 'Preguntas frecuentes',
+            href: '/faq'
+        }
     ]
 
     return (
@@ -54,27 +49,24 @@ export default function Footer({ copyrightText, logoSrc, logoAlt, text }) {
                         <Div className="col-lg-3 col-sm-6">
                             <Div className="cs-footer_item">
                                 <TextWidget
-                                    logoSrc='/logo.png'
+                                    logoSrc='/logo_white.png'
                                     logoAlt='Logo'
                                     text='Aquí encontrarás recursos para tu ministerio, navega y encuentra el contenido que necesitas.'
                                 />
                                 <SocialWidget />
                             </Div>
                         </Div>
-                        <Div className="col-lg-2 col-sm-6">
-
+                        <Div className="col-lg-3 col-sm-6">
+                            <Div className="cs-footer_item">
+                                <MenuWidget menuItems={menu} menuHeading='Conoce más' />
+                            </Div>
                         </Div>
                         <Div className="col-lg-3 col-sm-6">
                             <Div className="cs-footer_item">
                                 <MenuWidget menuItems={serviceMenu} menuHeading='Recursos' />
                             </Div>
                         </Div>
-                        {/* <Div className="col-lg-3 col-sm-6">
-                            <Div className="cs-footer_item">
-                                <ContactInfoWidget title='Donaciones' />
-                            </Div>
-                        </Div> */}
-                        <Div className="col-lg-4 col-sm-6">
+                        <Div className="col-lg-3 col-sm-6">
                             <Div className="cs-footer_item">
                                 <Newsletter
                                     title='Suscríbete'

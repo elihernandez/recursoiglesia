@@ -5,6 +5,7 @@ import PageHeading from 'components/PageHeading'
 import Portfolio from 'components/Portfolio'
 import SectionHeading from 'components/SectionHeading'
 import Spacing from 'components/Spacing'
+import FagWidget from 'components/Widget/FaqWidget'
 
 export default function RecursosPage(props) {
 
@@ -76,6 +77,7 @@ export default function RecursosPage(props) {
                 </Div>
             </Div>
             <Spacing lg='40' md='40' />
+            <FagWidget />
         </>
     )
 }

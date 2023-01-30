@@ -1,6 +1,3 @@
-/*--------------------------------------------------------------
-  4. General
-----------------------------------------------------------------*/
 .cs-row_gap_20 {
   margin-left: -10px;
   margin-right: -10px;
@@ -106,6 +103,10 @@
 
 .cs-font_30 {
   font-size: 28px;
+}
+
+.cs-font_38 {
+  font-size: 38px;
 }
 
 .cs-font_42 {
@@ -347,15 +348,15 @@ hr {
     }
     span {
       &::before {
-      left: initial;
-      right: -100%;
-      transform: scaleX(0) rotateY(180deg);
+        left: initial;
+        right: -100%;
+        transform: scaleX(0) rotateY(180deg);
       }
     }
     &:hover {
       span {
         &::before {
-        transform: scaleX(1) rotateY(180deg);
+          transform: scaleX(1) rotateY(180deg);
         }
       }
     }
@@ -368,7 +369,6 @@ hr {
       color: $accent;
     }
   }
-  
 }
 
 .cs-btn.cs-style1 {
@@ -387,13 +387,13 @@ hr {
   color: #fff;
   cursor: pointer;
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba($black, 0.4);
+    background-color: rgba($black, 0.4);
     transform: scaleX(0);
     transform-origin: 0 50%;
     transition-property: transform;
@@ -403,9 +403,8 @@ hr {
   }
   svg {
     margin-left: 14px;
-    font-size: 24px;
   }
-  >* {
+  > * {
     position: relative;
     z-index: 1;
   }
@@ -415,10 +414,23 @@ hr {
       transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
     }
   }
+  &.cs-type1 {
+    border: 2px solid #fff;
+    background-color: transparent;
+    border-radius: 5px;
+    transition: all 0.6s ease-out;
+    &::before {
+      background-color: #fff;
+      border-radius: 0px;
+    }
+    &:hover {
+      color: #000;
+    }
+  }
 }
 
 .cs-page_navigation {
-  >div {
+  > div {
     position: relative;
     &:not(:last-child) {
       margin-right: 21px;
@@ -481,7 +493,7 @@ label {
   width: 136px;
   height: 24px;
   position: relative;
-  >* {
+  > * {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -497,7 +509,7 @@ label {
 }
 .cs-post_meta.cs-style1 {
   display: flex;
-  >* {
+  > * {
     position: relative;
     display: inline-block;
     &:not(:last-child) {
@@ -522,11 +534,14 @@ label {
   font-size: 22px;
   margin-bottom: 0;
   transition: all 0.3s ease;
+  @media (max-width: 991px) {
+    font-size: 18px;
+  }
 }
 .cs-accordian_body {
   max-height: 0;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0,1,0,1);
+  transition: all 0.5s cubic-bezier(0, 1, 0, 1);
   p {
     margin: 0;
   }
@@ -551,6 +566,13 @@ label {
   &:not(:last-child) {
     margin-bottom: 25px;
   }
+  @media (max-width: 991px) {
+    padding-bottom: 15px;
+    border-width: 1px;
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
 }
 .cs-accordian_toggle {
   display: flex;
@@ -570,111 +592,27 @@ label {
   .cs-accordian_body {
     height: auto;
     max-height: 9999px;
-    transition: all 0.5s cubic-bezier(1,0,1,0);
+    transition: all 0.5s cubic-bezier(1, 0, 1, 0);
   }
 }
 /* End Accordion */
+#cs-result {
+  line-height: 2.8em;
+}
 .cs-parallax {
-  >*:not([class*="cs-shape_"]) {
+  > *:not([class*='cs-shape_']) {
     position: relative;
     z-index: 5;
   }
 }
-/* Odometer */
-.odometer.odometer-auto-theme,
-.odometer.odometer-auto-theme .odometer-digit,
-.odometer.odometer-theme-default,
-.odometer.odometer-theme-default .odometer-digit {
-  display: inline-block;
-  vertical-align: middle;
+.cs-fullscreen_swiper_wrap {
   position: relative;
+  height: 100vh;
 }
 
-.odometer.odometer-auto-theme .odometer-digit .odometer-digit-spacer,
-.odometer.odometer-theme-default .odometer-digit .odometer-digit-spacer {
-  display: inline-block;
-  vertical-align: middle;
-  visibility: hidden;
-}
-
-.odometer.odometer-auto-theme .odometer-digit .odometer-digit-inner,
-.odometer.odometer-theme-default .odometer-digit .odometer-digit-inner {
-  text-align: left;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-}
-
-.odometer.odometer-auto-theme .odometer-digit .odometer-ribbon,
-.odometer.odometer-theme-default .odometer-digit .odometer-ribbon {
-  display: block;
-}
-
-.odometer.odometer-auto-theme .odometer-digit .odometer-ribbon-inner,
-.odometer.odometer-theme-default .odometer-digit .odometer-ribbon-inner {
-  display: block;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
-.odometer.odometer-auto-theme .odometer-digit .odometer-value,
-.odometer.odometer-theme-default .odometer-digit .odometer-value {
-  display: block;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-}
-
-.odometer.odometer-auto-theme
-.odometer-digit
-.odometer-value.odometer-last-value,
-.odometer.odometer-theme-default
-.odometer-digit
-.odometer-value.odometer-last-value {
-  position: absolute;
-}
-
-.odometer.odometer-auto-theme.odometer-animating-up .odometer-ribbon-inner,
-.odometer.odometer-theme-default.odometer-animating-up .odometer-ribbon-inner {
-  -webkit-transition: -webkit-transform 2s;
-  transition: -webkit-transform 2s;
-  transition: transform 2s;
-  transition: transform 2s, -webkit-transform 2s;
-}
-
-.odometer.odometer-auto-theme.odometer-animating-down .odometer-ribbon-inner,
-.odometer.odometer-auto-theme.odometer-animating-up.odometer-animating
-.odometer-ribbon-inner,
-.odometer.odometer-theme-default.odometer-animating-down .odometer-ribbon-inner,
-.odometer.odometer-theme-default.odometer-animating-up.odometer-animating
-.odometer-ribbon-inner {
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
-}
-
-.odometer.odometer-auto-theme.odometer-animating-down.odometer-animating
-.odometer-ribbon-inner,
-.odometer.odometer-theme-default.odometer-animating-down.odometer-animating
-.odometer-ribbon-inner {
-  -webkit-transition: -webkit-transform 2s;
-  transition: -webkit-transform 2s;
-  transition: transform 2s;
-  transition: transform 2s, -webkit-transform 2s;
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
-}
-
-.odometer.odometer-auto-theme,
-.odometer.odometer-theme-default {
-  line-height: inherit;
-}
-
-.odometer.odometer-auto-theme .odometer-value,
-.odometer.odometer-theme-default .odometer-value {
-  text-align: center;
+.cs-fullscreen_swiper_slider {
+  width: 100%;
+  height: 100%;
 }
 
 @media screen and (max-width: 1399px) {
@@ -698,35 +636,35 @@ label {
   .cs-font_16_sm {
     font-size: 16px;
   }
-  
+
   .cs-font_18_sm {
     font-size: 18px;
   }
-  
+
   .cs-font_20_sm {
     font-size: 20px;
   }
-  
+
   .cs-font_22_sm {
     font-size: 22px;
   }
-  
+
   .cs-font_24_sm {
     font-size: 24px;
   }
-  
+
   .cs-font_26_sm {
     font-size: 26px;
   }
-  
+
   .cs-font_28_sm {
     font-size: 28px;
   }
-  
+
   .cs-font_42_sm {
     font-size: 42px;
   }
-  
+
   .cs-font_36_sm {
     font-size: 36px;
   }
@@ -741,10 +679,33 @@ label {
   }
 }
 
+.cs-partner_logo_wrap {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 -20px;
+}
+.cs-partner_logo {
+  padding: 20px;
+}
+
+.cs-video_block_1_wrap {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    left: 0%;
+    top: 0%;
+    background-color: #000;
+  }
+}
+
 .cs-video_block.cs-style1 {
   display: block;
   height: 725px;
   position: relative;
+  z-index: 10;
   overflow: hidden;
   border-radius: 20px;
   &::before {
@@ -762,6 +723,9 @@ label {
     &::before {
       opacity: 1;
     }
+  }
+  &.cs-size1 {
+    height: 580px;
   }
 }
 
@@ -783,7 +747,7 @@ label {
 
 .cs-player_btn:before,
 .cs-player_btn:after {
-  content: "";
+  content: '';
   position: absolute;
   left: 50%;
   top: 50%;
@@ -831,8 +795,8 @@ label {
   background-attachment: fixed;
 }
 
-.cs-parallax [class*=cs-to_], 
-.cs-parallax_bg [class*=cs-to_] {
+.cs-parallax [class*='cs-to_'],
+.cs-parallax_bg [class*='cs-to_'] {
   transition: all 0.6s ease;
 }
 
@@ -854,14 +818,15 @@ label {
     border-radius: 2px;
   }
 }
-.cs-hover_layer, .cs-hover_layer1, .cs-hover_layer3 {
+.cs-hover_layer,
+.cs-hover_layer1,
+.cs-hover_layer3 {
   position: relative;
   transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   transform: perspective(600px) translate3d(0, 0, 0);
 }
 
 @keyframes particalAnimation {
-
   0%,
   100% {
     transform: translate(0px, 0px);
@@ -893,7 +858,11 @@ label {
     animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateX(44px);
   }
-
+}
+@keyframes light-mode {
+  50% {
+    opacity: 0.5;
+  }
 }
 
 @keyframes animo-y {
@@ -901,7 +870,6 @@ label {
     animation-timing-function: cubic-bezier(0.55, 0, 0.2, 1);
     transform: translateY(30px);
   }
-
 }
 
 @keyframes rotate-anim {
@@ -1002,10 +970,10 @@ label {
 .cs-shape_wrap_3 {
   position: relative;
   .cs-shape_3 {
+    animation: animo-y 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     position: absolute;
     right: 20px;
     top: -15%;
-    animation: animo-y 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 }
 .cs-shape_wrap_4 {
@@ -1029,7 +997,56 @@ label {
     }
   }
 }
-
+.cs-shape_wrap_5 {
+  position: relative;
+  .cs-section_heading {
+    position: relative;
+    z-index: 2;
+  }
+  .cs-shape_1 {
+    position: absolute;
+    &:nth-child(1) {
+      top: 25%;
+      left: 58%;
+      animation: semi-rotate-anim 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    &:nth-child(2) {
+      top: 40%;
+      left: 85%;
+      transform: rotate(-15deg);
+      animation: semi-rotate-anim 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    &:nth-child(3) {
+      top: 85%;
+      left: 72%;
+      transform: rotate(-30deg);
+      animation: animo-x 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+  }
+}
+.cs-shape_wrap_6 {
+  position: relative;
+  overflow: hidden;
+  > .container {
+    position: relative;
+    z-index: 3;
+  }
+  .cs-shape_2 {
+    > div {
+      background-color: #181818;
+    }
+    &:nth-child(1) {
+      left: -240px;
+      top: 30px;
+      animation: animo-x 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    &:nth-child(2) {
+      bottom: 30px;
+      right: -200px;
+      animation: animo-x 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+  }
+}
 .cs-contact_info.cs-style1 {
   svg {
     position: absolute;
@@ -1062,7 +1079,7 @@ label {
     opacity: 0.8;
     filter: blur(125px);
   }
-  >* {
+  > * {
     position: relative;
     z-index: 2;
   }
@@ -1082,11 +1099,11 @@ label {
   }
 }
 
-.breadcrumb-item+.breadcrumb-item {
+.breadcrumb-item + .breadcrumb-item {
   padding-left: 14px;
 }
 
-.breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-item + .breadcrumb-item::before {
   content: '';
   height: 17px;
   width: 1px;
@@ -1118,8 +1135,18 @@ label {
       border-radius: inherit;
     }
   }
+  &.cs-size_md {
+    padding-right: 20px;
+    padding-bottom: 20px;
+    .cs-image_layer_in {
+      &::after {
+        right: -20px;
+        bottom: -20px;
+      }
+    }
+  }
 }
-.cs-tab{
+.cs-tab {
   display: none;
   &.active {
     display: block;
@@ -1128,9 +1155,9 @@ label {
 
 .cs-tabs.cs-style1 {
   .cs-tabs_heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 .cs-tab_links.cs-style1 {
@@ -1155,15 +1182,31 @@ label {
       pointer-events: none;
     }
   }
+  @media (max-width: 1380px) {
+    top: -185px;
+  }
+  @media (max-width: 991px) {
+    top: -128px;
+  }
+  @media (max-width: 767px) {
+    margin-bottom: 40px;
+    position: static;
+  }
 }
 
 .cs-google_map {
+  height: 600px;
   iframe {
-    height: 600px;
+    height: 100%;
     display: block;
     border: none;
     width: 100%;
     filter: grayscale(100%) invert(90%) contrast(120%);
+  }
+  &.cs-type1 {
+    height: 100%;
+    min-height: 300px;
+    width: 50vw;
   }
 }
 
@@ -1186,7 +1229,11 @@ label {
     z-index: 2;
     width: 50%;
     height: 100%;
-    background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.2) 100%);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 100%
+    );
     transform: skewX(-25deg);
     z-index: 1;
   }
@@ -1198,9 +1245,9 @@ label {
 }
 
 @keyframes shine {
-	100% {
-		left: 125%;
-	}
+  100% {
+    left: 125%;
+  }
 }
 
 .cs-rotate_img {
@@ -1210,6 +1257,129 @@ label {
 }
 .cs-rotate_img_in {
   transform: rotate(-45deg) scale(1.4);
+}
+
+.cs-half_screen {
+  width: 56vw;
+}
+
+.lg-backdrop {
+  background-color: #181818;
+}
+.lg-toolbar .lg-icon,
+#lg-counter,
+.lg-actions .lg-next,
+.lg-actions .lg-prev {
+  color: #fff;
+}
+.lg-toolbar .lg-icon:hover,
+.lg-actions .lg-next:hover,
+.lg-actions .lg-prev:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cs-scrollup {
+  position: fixed;
+  bottom: -60px;
+  right: 40px;
+  color: #fff;
+  padding: 5px;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  z-index: 10;
+  background-color: #000000;
+  color: $accent;
+  box-shadow: 0px 1px 5px 1px rgba($black, 0.2);
+  border-radius: 50%;
+  &:hover {
+    background-color: $accent;
+    color: $white;
+  }
+}
+
+.cs-scrollup.cs-scrollup_show {
+  bottom: 50px;
+}
+
+.cs-case_study {
+  position: relative;
+  padding: 150px 120px;
+  .cs-case_study_bg {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    .cs-accent_bg {
+      flex: 1;
+    }
+    .cs-bg {
+      flex: 2;
+    }
+  }
+  .cs-case_study_title {
+    background: rgba($gray, 0.9);
+    border-radius: 15px;
+    margin: 0;
+    position: relative;
+    z-index: 10;
+    font-weight: 700;
+    font-size: 120px;
+    line-height: 1.25em;
+    color: #fefefe;
+    display: inline-flex;
+    padding: 40px 150px;
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-decoration-skip-ink: none;
+      text-decoration-thickness: 0.07em;
+      text-underline-position: under;
+      text-underline-offset: -0.12em;
+      &:hover {
+        text-decoration-color: $accent;
+      }
+    }
+  }
+  &.cs-style2 {
+    text-align: right;
+    .cs-case_study_bg {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+.cs-faq_nav {
+  height: 100%;
+  background-color: #000;
+  padding: 45px 35px;
+  .cs-faq_nav_title {
+    font-size: 30px;
+  }
+}
+
+.swiper-slide {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  .cs-entity_img {
+    display: none;
+  }
+}
+
+.cs-parallax_slider {
+  transition: opacity 0.6s ease, transform 0.3s ease;
+  &.loading {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .cs-half_of_full_width {
@@ -1225,8 +1395,9 @@ label {
 
 .cs-filter_menu.cs-style1 {
   li {
-    &:not(:first-child) {
-      margin-left: 28px;
+    margin-top: 10px;
+    &:not(:last-child) {
+      margin-right: 28px;
     }
   }
   span {
@@ -1254,6 +1425,7 @@ label {
     border-bottom: 1px solid $ternary;
     flex-wrap: wrap;
     display: inline-flex;
+    justify-content: flex-start;
   }
 
   .active {
@@ -1264,23 +1436,23 @@ label {
       }
     }
   }
-  
-  @media screen and (max-width: 575px) {
-    ul {
-      border: none;
-    }
-    li {
-      margin-bottom: 8px;
-      &:not(:first-child) {
-        margin-left: 20px;
-      }
-    }
-    a {
-      padding-bottom: 3px;
-    }
+}
+
+.cs-masonry_4_col {
+  column-count: 4;
+  column-gap: 25px;
+  padding: 0 25px;
+  > * {
+    margin-bottom: 25px;
   }
 }
 
+@media screen and (max-width: 1540px) {
+  .cs-case_study .cs-case_study_title {
+    font-size: 100px;
+    padding: 40px 120px;
+  }
+}
 @media screen and (max-width: 1550px) {
   .cs-shape_wrap_2 .cs-shape_2 {
     right: -15%;
@@ -1291,6 +1463,12 @@ label {
   }
 }
 
+@media screen and (max-width: 1400px) {
+  .cs-case_study .cs-case_study_title {
+    font-size: 80px;
+    padding: 40px 100px;
+  }
+}
 @media screen and (max-width: 1380px) {
   .cs-section_heading.cs-style1 .cs-section_title {
     font-size: 42px;
@@ -1305,14 +1483,26 @@ label {
   .cs-page_heading.cs-style1 {
     height: 550px;
   }
-  .cs-tab_links.cs-style1 {
-    top: -185px;
-  }
 }
 
 @media screen and (max-width: 1199px) {
   .cs-page_heading.cs-style1 {
     height: 450px;
+  }
+  .cs-half_screen {
+    width: 100%;
+  }
+  .cs-video_block.cs-style1.cs-size1 {
+    height: 450px;
+  }
+  .cs-case_study .cs-case_study_title {
+    font-size: 60px;
+  }
+  .cs-masonry_4_col {
+    column-count: 2;
+  }
+  .cs-half_of_full_width {
+    width: 100%;
   }
 }
 @media screen and (max-width: 991px) {
@@ -1328,24 +1518,33 @@ label {
   .cs-shape_wrap_4 .cs-shape_4:nth-child(1),
   .cs-shape_wrap_4 .cs-shape_4:nth-child(2),
   .cs-shape_wrap_2 .cs-shape_2,
-  .cs-shape_wrap_3 .cs-shape_3 {
+  .cs-shape_wrap_3 .cs-shape_3,
+  .cs-shape_wrap_6 .cs-shape_2 {
     display: none;
   }
   .cs-font_50 {
     font-size: 36px;
   }
-  .cs-video_block.cs-style1 {
+  .cs-font_38 {
+    font-size: 32px;
+  }
+  .cs-video_block.cs-style1,
+  .cs-video_block.cs-style1.cs-size1 {
     height: 400px;
     .cs-player_btn {
       transform: translate(-50%, -50%) scale(0.8);
     }
   }
   .cs-page_heading.cs-style1 {
+    padding: 100px 0 50px;
     height: 400px;
+    .cs-page_title {
+      margin-bottom: 15px;
+    }
   }
   .cs-portfolio_1_heading {
     .cs-tabs_heading {
-        display: block;
+      display: block;
     }
     .cs-section_heading + .cs-filter_menu {
       margin-top: 30px;
@@ -1354,42 +1553,65 @@ label {
   .cs-list.cs-style1 li:not(:last-child) {
     margin-bottom: 10px;
   }
-  .cs-accordian_title {
-    font-size: 18px;
-  }
-  .cs-accordian:not(:last-child) {
-    margin-bottom: 15px;
-  }
-  .cs-accordian {
-    padding-bottom: 15px;
-    border-width: 1px;
-  }
-  .cs-google_map iframe {
+  .cs-google_map {
     height: 400px;
   }
   .cs-btn.cs-style1 {
     padding: 10px 20px;
   }
+  .cs-faq_nav {
+    padding: 30px 30px;
+    .cs-faq_nav_title {
+      font-size: 26px;
+    }
+  }
+  .cs-google_map.cs-type1 {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .cs-scrollup {
+    right: 15px;
+    &.cs-scrollup_show {
+      bottom: 50px;
+    }
+  }
+  .cs-column_reverse_lg {
+    flex-direction: column-reverse;
+  }
+  .cs-case_study {
+    position: relative;
+    padding: 80px 70px;
+    .cs-case_study_title {
+      font-size: 56px;
+      padding: 25px 45px;
+    }
+  }
+  #cs-result {
+    line-height: 2.2em;
+  }
   .cs-half_of_full_width {
     width: 100%;
-  }
-  .cs-tab_links.cs-style1 {
-    top: -128px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .cs-tabs.cs-style1 {
     .cs-tabs_heading {
-        display: block;
+      display: block;
     }
     .cs-section_heading + .cs-tab_links {
       margin-top: 50px;
     }
   }
-  .cs-tab_links.cs-style1 {
-    position: initial;
-    margin-bottom: 40px;
+  .cs-case_study {
+    padding: 80px 12px;
+    .cs-case_study_title {
+      font-size: 40px;
+      padding: 25px 25px;
+    }
   }
 }
 @media screen and (max-width: 575px) {
@@ -1404,13 +1626,28 @@ label {
       bottom: -30px;
     }
   }
-  .cs-video_block.cs-style1 {
+  .cs-video_block.cs-style1,
+  .cs-video_block.cs-style1.cs-size1 {
     height: 380px;
     .cs-player_btn {
       transform: translate(-50%, -50%) scale(0.7);
     }
   }
+  .cs-partner_logo_wrap {
+    margin: 0 -10px;
+  }
   .cs-partner_logo {
     padding: 10px;
+  }
+  .cs-case_study .cs-case_study_title {
+    font-size: 30px;
+  }
+  .cs-page_heading.cs-style1 {
+    .breadcrumb {
+      justify-content: center;
+    }
+  }
+  .cs-masonry_4_col {
+    column-count: 1;
   }
 }

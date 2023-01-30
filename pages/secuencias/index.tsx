@@ -5,9 +5,10 @@ import PageHeading from 'components/PageHeading'
 import Pagination from 'components/Pagination'
 import SectionHeading from 'components/SectionHeading'
 import Spacing from 'components/Spacing'
-import RecentPost from 'components/Widget/RecentPost'
+import MultitrackPost from 'components/Widget/MultitrackPost'
 import SearchWidget from 'components/Widget/SearchWidget'
 import Head from 'next/head'
+import FagWidget from 'components/Widget/FaqWidget'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { limitPageMultitracks } from 'api/helpers/constants'
@@ -160,6 +161,7 @@ export default function SecuenciasPage(props) {
                     </Div>
                     : <MultitracksList active={active} data={data} page={page} search={search} />
                 }
+                <FagWidget />
             </Div>
         </>
     )
@@ -175,7 +177,7 @@ const MultitracksList = ({ active, data, page, search }) => {
 
     return (
         <Div>
-            <RecentPost title={search != '' ? `Resultados de '${search}'` : active} data={data?.multitracks} />
+            <MultitrackPost title={search != '' ? `Resultados de '${search}'` : active} data={data?.multitracks} />
             <Spacing lg='80' md='40' />
             {data?.count &&
                 <Pagination

@@ -30,7 +30,7 @@ export default function Header() {
                         <Div className="cs-main_header_in">
                             <Div className="cs-main_header_left">
                                 <Link className="cs-site_branding" href="/">
-                                    <img src="/logo.png" alt="Logo" width="80%" />
+                                    <img src="/logo_white.png" alt="Logo" width="80%" />
                                 </Link>
                             </Div>
                             <Div className="cs-main_header_center">
@@ -51,6 +51,7 @@ export default function Header() {
                                                 </ul>
                                             </DropDown>
                                         </li>
+                                        <li><Link href='/faq' onClick={() => setMobileToggle(false)}>FAQ</Link></li>
                                         {/* <li><Link href='/' onClick={() => setMobileToggle(false)}>Donaciones</Link></li> */}
                                     </ul>
                                     <span className={mobileToggle ? 'cs-munu_toggle cs-toggle_active' : 'cs-munu_toggle'} onClick={() => setMobileToggle(!mobileToggle)}><span></span></span>
@@ -79,7 +80,7 @@ export default function Header() {
                 <Div className="cs-side_header_in">
                     <Div className="cs-side_header_shape" />
                     <Link className="cs-site_branding" href="/">
-                        <img src="/logo.png" alt="Logo" width="80%" />
+                        <img src="/logo_white.png" alt="Logo" width="80%" />
                     </Link>
                     {/* <Div className="cs-side_header_box">
             <h2 className="cs-side_header_heading">Do you have a project in your  <br /> mind? Keep connect us.</h2>

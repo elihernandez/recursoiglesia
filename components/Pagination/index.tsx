@@ -63,7 +63,7 @@ export default function Pagination({ pageActive, link, length, searchText, limit
                     className={`cs-pagination_item cs-center ${pageActive === page ? 'active' : ''}`}>
                     {page}
                 </Link>}
-                pageRangeDisplayed={limit}
+                pageRangeDisplayed={4}
                 marginPagesDisplayed={0}
                 pageCount={pageCount}
                 forcePage={pageActive}

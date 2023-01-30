@@ -24,7 +24,7 @@ export default function RecentPost({ title, data }: Props) {
                                 <h3 className="cs-recent_post_title">
                                     <Link href={item.url} scroll={false} target="_blank">{item.name}</Link>
                                 </h3>
-                                <Div className="cs-recent_post_date cs-primary_40_color">{item.artist.name}</Div>
+                                <Div className="cs-recent_post_date cs-primary_40_color">{item.artist.name} - {item.album.name}</Div>
                             </Div>
                         </Div>
                     </li>
