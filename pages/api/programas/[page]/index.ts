@@ -12,7 +12,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             const softwares = await prisma.software.findMany({
                 skip: page === 1 ? 0 : take - limitPageSoftware,
-                take: limitPageSoftware
+                take: limitPageSoftware,
+                select: {
+                    id: true,
+                    name: true,
+                    url: true,
+                    imgUrl: true
+                }
             })
 
             const count = await prisma.software.count()

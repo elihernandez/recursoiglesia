@@ -22,6 +22,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             }
                         }
                     ]
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    url: true,
+                    imgUrl: true
                 }
             })
 

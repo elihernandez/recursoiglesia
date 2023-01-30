@@ -13,7 +13,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const multitracks = await prisma.multitrack.findMany({
                 skip: page === 1 ? 0 : take - limitPageMultitracks,
                 take: limitPageMultitracks,
-                include: {
+                select: {
+                    id: true,
+                    name: true,
+                    url: true,
                     artist: true,
                     album: true
                 }

@@ -12,7 +12,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             const templates = await prisma.template.findMany({
                 skip: page === 1 ? 0 : take - limitPageTemplates,
-                take: limitPageTemplates
+                take: limitPageTemplates,
+                select: {
+                    id: true,
+                    name: true,
+                    url: true,
+                    imgUrl: true
+                }
             })
 
             const count = await prisma.template.count()

@@ -37,7 +37,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         }
                     ]
                 },
-                include: {
+                select: {
+                    id: true,
+                    name: true,
+                    url: true,
                     artist: true,
                     album: true
                 }

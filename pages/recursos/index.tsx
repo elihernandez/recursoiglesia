@@ -32,41 +32,6 @@ export default function RecursosPage(props) {
             src: '/images/recursos_programas.jpg',
             category: 'programas'
         }
-        // {
-        //     title: 'Software',
-        //     subtitle: 'Ver software',
-        //     href: '/portfolio/portfolio-details',
-        //     src: '/images/portfolio_5.jpeg',
-        //     category: 'software'
-        // },
-        // {
-        //     title: 'Fuentes',
-        //     subtitle: 'Ver fuentes',
-        //     href: '/portfolio/portfolio-details',
-        //     src: '/images/portfolio_6.jpeg',
-        //     category: 'fuentes'
-        // },
-        // {
-        //     title: 'Plantillas de diseño',
-        //     subtitle: 'Ver plantillas',
-        //     href: '/portfolio/portfolio-details',
-        //     src: '/images/portfolio_7.jpeg',
-        //     category: 'plantillasdiseño'
-        // },
-        // {
-        //     title: 'Libros',
-        //     subtitle: 'Ver libros',
-        //     href: '/portfolio/portfolio-details',
-        //     src: '/images/portfolio_6.jpeg',
-        //     category: 'libros'
-        // },
-        // {
-        //     title: 'Pistas musicales',
-        //     subtitle: 'Ver pistas',
-        //     href: '/portfolio/portfolio-details',
-        //     src: '/images/portfolio_7.jpeg',
-        //     category: 'pistasmusicales'
-        // }
     ]
 
 
