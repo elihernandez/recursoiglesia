@@ -28,14 +28,15 @@ model Album {
 }
 
 model Multitrack {
-  id       String  @id @default(uuid())
-  name     String
-  url      String?
-  link     String?
-  album    Album?  @relation(fields: [albumId], references: [id])
-  albumId  String?
-  artist   Artist? @relation(fields: [artistId], references: [id])
-  artistId String?
+  id                 String              @id @default(uuid())
+  name               String
+  url                String?
+  link               String?
+  album              Album?              @relation(fields: [albumId], references: [id])
+  albumId            String?
+  artist             Artist?             @relation(fields: [artistId], references: [id])
+  artistId           String?
+  multitrackRequests MultitrackRequest[]
 }
 
 model Template {
@@ -57,4 +58,13 @@ model Software {
   imgUrl String
   url    String?
   link   String?
+}
+
+model MultitrackRequest {
+  id           String     @id @default(uuid())
+  email        String
+  multitrackId String
+  multitrack   Multitrack @relation(fields: [multitrackId], references: [id])
+  isSent       Boolean    @default(false)
+  createdAt    DateTime   @default(now())
 }

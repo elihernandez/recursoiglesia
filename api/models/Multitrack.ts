@@ -1,5 +1,6 @@
 import { Album } from './Album'
 import { Artist } from './Artist'
+import { MultitrackRequest } from './MultitrackRequest'
 
 export interface Multitrack {
   id?: string
@@ -10,4 +11,5 @@ export interface Multitrack {
   artist?: Artist
   albumId?: string
   album?: Album
+  multitrackRequest: Array<MultitrackRequest>
 }

@@ -159,16 +159,24 @@ kbd {
 }
 
 @media screen and (max-width: 991px) {
+
   body,
   html {
     font-size: 16px;
     line-height: 1.6em;
   }
+
   h2 {
     font-size: 36px;
     margin-bottom: 10px;
   }
 }
-input, textarea {
+
+input,
+textarea {
   color: $primary;
+}
+
+.color-accent {
+  color: $accent;
 }
