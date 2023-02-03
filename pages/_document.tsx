@@ -20,6 +20,11 @@ export default function Document(props) {
                         });
                     `}
                 </Script>
+                <Script id="Adsense-id" data-ad-client="ca-pub-5669403217581992"
+                    async strategy="afterInteractive"
+                    onError={(e) => { console.error('Script failed to load', e) }}
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+                />
             </Head>
             <body>
                 <Main />
