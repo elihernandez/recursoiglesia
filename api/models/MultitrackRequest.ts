@@ -4,7 +4,7 @@ export interface MultitrackRequest {
     id?: string
     email: string
     multitrackId: string
-    multitrack: Multitrack
+    multitrack?: Multitrack
     isSent: boolean
-    createdAt: Date
+    createdAt?: Date
 }
