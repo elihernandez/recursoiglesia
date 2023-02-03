@@ -24,7 +24,7 @@ export default function AlbumPost({ title, artist, data }: Props) {
                             </Div>
                             <Div className="cs-recent_post_info">
                                 <h3 className="cs-recent_post_title">
-                                    <Link href={`/secuencias/${strToParam(artist.name)}/${strToParam(item.name)}}`} scroll={false}>{item.name}</Link>
+                                    <Link href={`/secuencias/${strToParam(artist.name)}/${strToParam(item.name)}`} scroll={false}>{item.name}</Link>
                                 </h3>
                                 <Div className="cs-recent_post_date cs-primary_40_color">
                                     <Link href={`/secuencias/${strToParam(artist.name)}`} scroll={false}>{artist.name}</Link>

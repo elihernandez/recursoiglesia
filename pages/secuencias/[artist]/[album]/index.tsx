@@ -9,50 +9,43 @@ import MultitrackPost from 'components/Widget/MultitrackPost'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { InferGetStaticPropsType } from 'next'
+import { prisma } from 'api/config/db'
 
 type stateProps = {
     albums: Array<Album>,
     count: number
 }
 
-export default function AlbumPage(props) {
-    const router = useRouter()
+export default function AlbumPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+    const { artist, album } = props
 
-    const [queryArtist, setQueryArtist] = useState<string>('')
-    const [queryAlbum, setQueryAlbum] = useState<string>('')
     const [data, setData] = useState<stateProps>(null)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
-        if (router.query?.artist) setQueryArtist(paramToStr(router.query.artist as string))
-        if (router.query?.album) setQueryAlbum(paramToStr(router.query.album as string))
-    }, [router])
-
-    useEffect(() => {
         const getData = async () => {
             setIsLoading(true)
-            const response = await axios.get(`/api/album/${queryAlbum}`)
-            console.log(response.data)
-
+            const response = await axios.get(`/api/album/${album}`)
             setData(response.data)
             setIsLoading(false)
         }
 
-        if (queryAlbum != '') getData()
-    }, [queryAlbum])
+        if (album != '') getData()
+    }, [album])
 
     return (
         <>
             <Head>
-                <title>{queryAlbum} | Secuencias/Multitracks</title>
-                <meta name="description" content={`Secuencias/Multitracks gratis de ${queryAlbum}`} />
+                <title>{album} | Secuencias/Multitracks</title>
+                <meta name="description" content={`Secuencias/Multitracks gratis del álbum ${album} - ${artist}`} />
             </Head>
             <PageHeading
-                title={queryAlbum}
+                title={album}
                 bgSrc='/images/portfolio_hero_bg.jpeg'
-                pageLinkPrev={`/secuencias/${strToParam(queryArtist)}`}
-                pageTextPrev={queryArtist}
-                pageLinkText={queryAlbum}
+                pageLinkPrev={`/secuencias/${strToParam(artist)}`}
+                pageTextPrev={artist}
+                pageLinkText={album}
             />
             <Spacing lg='40' md='40' />
             <Div className="container" id="container">
@@ -61,7 +54,7 @@ export default function AlbumPage(props) {
                         <Div className="cs-portfolio_1_heading">
                             <Div className="col-12 col-sm-6 col-lg-8">
                                 <SectionHeading
-                                    title={queryAlbum}
+                                    title={album}
                                     subtitle='Secuencias'
                                 />
                             </Div>
@@ -100,4 +93,32 @@ const MultitracksList = ({ data }) => {
             <Spacing lg='80' md='40' />
         </Div>
     )
+}
+
+export async function getStaticPaths() {
+    const artists = await prisma.artist.findMany({
+        include: {
+            albums: true
+        }
+    })
+
+    let paths = []
+
+    artists.map((artist) => {
+        artist.albums.map((album) => {
+            paths.push({ params: { artist: strToParam(artist.name), album: strToParam(album.name) } })
+        })
+    })
+
+
+    return { paths, fallback: false }
+}
+
+export async function getStaticProps({ params }) {
+    return {
+        props: {
+            artist: paramToStr(params.artist),
+            album: paramToStr(params.album)
+        }
+    }
 }
