@@ -1,51 +1,42 @@
-import { Album } from '@prisma/client'
+import { prisma } from 'api/config/db'
 import { paramToStr, strToParam } from 'api/helpers/strings'
-import axios from 'axios'
+import { Album } from 'api/models/Album'
+import { Multitrack } from 'api/models/Multitrack'
 import Div from 'components/Div'
 import PageHeading from 'components/PageHeading'
 import SectionHeading from 'components/SectionHeading'
 import Spacing from 'components/Spacing'
 import MultitrackPost from 'components/Widget/MultitrackPost'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import { InferGetStaticPropsType } from 'next'
-import { prisma } from 'api/config/db'
-
-type stateProps = {
-    albums: Array<Album>,
-    count: number
-}
+import Head from 'next/head'
+import { getAlbum } from 'pages/api/album/[name]'
 
 export default function AlbumPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
-    const { artist, album } = props
+    const artist = props.artist
+    const album = JSON.parse(props.album)
+    const { name: albumName } = album
 
-    const [data, setData] = useState<stateProps>(null)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const getNamesMultitracks = (album: Album) => {
+        const arr = []
+        album.multitracks.forEach((multitrack: Multitrack) => {
+            arr.push(multitrack.name)
+        })
 
-    useEffect(() => {
-        const getData = async () => {
-            setIsLoading(true)
-            const response = await axios.get(`/api/album/${album}`)
-            setData(response.data)
-            setIsLoading(false)
-        }
-
-        if (album != '') getData()
-    }, [album])
+        return arr.join(', ')
+    }
 
     return (
         <>
             <Head>
-                <title>{album} | Secuencias/Multitracks</title>
-                <meta name="description" content={`Secuencias/Multitracks gratis del álbum ${album} - ${artist}`} />
+                <title>{albumName} | Secuencias/Multitracks</title>
+                <meta name="description" content={`Secuencias/Multitracks gratis del álbum ${albumName} - ${artist}${album.multitracks.length === 0 ? '' : ': ' + getNamesMultitracks(album)}`} />
             </Head>
             <PageHeading
-                title={album}
+                title={albumName}
                 bgSrc='/images/portfolio_hero_bg.jpeg'
                 pageLinkPrev={`/secuencias/${strToParam(artist)}`}
                 pageTextPrev={artist}
-                pageLinkText={album}
+                pageLinkText={albumName}
             />
             <Spacing lg='40' md='40' />
             <Div className="container" id="container">
@@ -54,7 +45,7 @@ export default function AlbumPage(props: InferGetStaticPropsType<typeof getStati
                         <Div className="cs-portfolio_1_heading">
                             <Div className="col-12 col-sm-6 col-lg-8">
                                 <SectionHeading
-                                    title={album}
+                                    title={albumName}
                                     subtitle='Secuencias'
                                 />
                             </Div>
@@ -62,7 +53,7 @@ export default function AlbumPage(props: InferGetStaticPropsType<typeof getStati
                     </Div>
                 </Div>
                 <Spacing lg='80' md='40' />
-                {isLoading
+                {/* {isLoading
                     ?
                     <Div className="container">
                         <Div className="row justify-content-center">
@@ -72,16 +63,17 @@ export default function AlbumPage(props: InferGetStaticPropsType<typeof getStati
                             </div>
                         </Div>
                     </Div>
-                    : <MultitracksList data={data} />
-                }
+                    : <MultitracksList data={album.multitracks} />
+                } */}
+                <MultitracksList data={album.multitracks} />
             </Div>
         </>
     )
 }
 
-const MultitracksList = ({ data }) => {
+const MultitracksList = ({ data }: { data: Array<Multitrack> }) => {
 
-    if (data?.album?.multitracks.length === 0) {
+    if (data.length === 0) {
         return <Div>
             No se encontraron resultados
         </Div>
@@ -89,7 +81,7 @@ const MultitracksList = ({ data }) => {
 
     return (
         <Div>
-            <MultitrackPost title='Canciones' data={data?.album?.multitracks} />
+            <MultitrackPost title='Canciones' data={data} />
             <Spacing lg='80' md='40' />
         </Div>
     )
@@ -115,10 +107,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+    const album = await getAlbum(paramToStr(params.album))
+
     return {
         props: {
             artist: paramToStr(params.artist),
-            album: paramToStr(params.album)
+            album: JSON.stringify(album)
         }
     }
 }

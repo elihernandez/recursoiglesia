@@ -1,49 +1,33 @@
-import axios from 'axios'
-import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import { InferGetStaticPropsType } from 'next'
+import { prisma } from 'api/config/db'
+import { paramToStr, strToParam } from 'api/helpers/strings'
+import { Album } from 'api/models/Album'
+import { Artist } from 'api/models/Artist'
 import Div from 'components/Div'
 import PageHeading from 'components/PageHeading'
 import SectionHeading from 'components/SectionHeading'
 import Spacing from 'components/Spacing'
 import AlbumPost from 'components/Widget/AlbumPost'
-import { Album } from '@prisma/client'
-import { paramToStr, strToParam } from 'api/helpers/strings'
-import { prisma } from 'api/config/db'
+import { InferGetStaticPropsType } from 'next'
+import Head from 'next/head'
+import { getArtist } from 'pages/api/artist/[name]'
 
-type stateProps = {
-    albums: Array<Album>,
-    count: number
-}
 
 export default function ArtistPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
-    const { artist } = props
-    const [data, setData] = useState<stateProps>(null)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-
-    useEffect(() => {
-        const getData = async () => {
-            setIsLoading(true)
-            const response = await axios.get(`/api/artist/${artist}`)
-            setData(response.data)
-            setIsLoading(false)
-        }
-
-        if (artist != '') getData()
-    }, [artist])
+    const artist: Artist = JSON.parse(props.artist)
+    const { name: artistName } = artist
 
     return (
         <>
             <Head>
-                <title>{artist} | Secuencias/Multitracks</title>
-                <meta name="description" content={`Secuencias/Multitracks gratis del artista ${artist}`} />
+                <title>{artistName} | Secuencias/Multitracks</title>
+                <meta name="description" content={`Secuencias/Multitracks gratis del artista ${artistName}`} />
             </Head>
             <PageHeading
-                title={artist}
+                title={artistName}
                 bgSrc='/images/portfolio_hero_bg.jpeg'
                 pageLinkPrev='/secuencias'
                 pageTextPrev='Secuencias'
-                pageLinkText={artist}
+                pageLinkText={artistName}
             />
             <Spacing lg='40' md='40' />
             <Div className="container" id="container">
@@ -52,7 +36,7 @@ export default function ArtistPage(props: InferGetStaticPropsType<typeof getStat
                         <Div className="cs-portfolio_1_heading">
                             <Div className="col-12 col-sm-6 col-lg-8">
                                 <SectionHeading
-                                    title={artist}
+                                    title={artistName}
                                     subtitle='Secuencias'
                                 />
                             </Div>
@@ -60,7 +44,7 @@ export default function ArtistPage(props: InferGetStaticPropsType<typeof getStat
                     </Div>
                 </Div>
                 <Spacing lg='80' md='40' />
-                {isLoading
+                {/* {isLoading
                     ?
                     <Div className="container">
                         <Div className="row justify-content-center">
@@ -71,15 +55,16 @@ export default function ArtistPage(props: InferGetStaticPropsType<typeof getStat
                         </Div>
                     </Div>
                     : <AlbumList data={data} />
-                }
+                } */}
+                <AlbumList artist={artist} albums={artist.albums} />
             </Div>
         </>
     )
 }
 
-const AlbumList = ({ data }) => {
+const AlbumList = ({ artist, albums }: { artist: Artist, albums: Array<Album> }) => {
 
-    if (data?.artist.albums.length === 0) {
+    if (albums.length === 0) {
         return <Div>
             No se encontraron resultados
         </Div>
@@ -87,7 +72,7 @@ const AlbumList = ({ data }) => {
 
     return (
         <Div>
-            <AlbumPost title='Álbumes' artist={data?.artist} data={data?.artist.albums} />
+            <AlbumPost title='Álbumes' artist={artist} data={albums} />
             <Spacing lg='80' md='40' />
         </Div>
     )
@@ -104,9 +89,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+    const artist = await getArtist(paramToStr(params.artist))
+
     return {
         props: {
-            artist: paramToStr(params.artist)
+            artist: JSON.stringify(artist)
         }
     }
 }

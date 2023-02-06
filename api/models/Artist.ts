@@ -1,3 +1,4 @@
+import { Album } from './Album'
 import { Multitrack } from './Multitrack'
 
 export interface Artist {
@@ -5,4 +6,5 @@ export interface Artist {
   name: string
   imgUrl: string
   multitracks?: Array<Multitrack>
+  albums: Array<Album>
 }

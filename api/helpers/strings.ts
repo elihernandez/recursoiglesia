@@ -4,7 +4,7 @@ export function strToParam(str: string): string {
 }
 
 export function paramToStr(str: string): string {
-    return toNormalForm(str.replace(/([.?*+^$[\]\\{}|-])/g, ' '))
+    return toNormalForm(str.replace(/([?*+^$[\]\\{}|-])/g, ' '))
 }
 
 function toNormalForm(str) {

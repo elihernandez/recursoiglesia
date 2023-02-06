@@ -6,22 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const albumName: string = req.query?.name as string
 
         try {
-            const album = await prisma.album.findFirst({
-                where: {
-                    name: albumName
-                },
-                include: {
-                    multitracks: {
-                        select: {
-                            id: true,
-                            name: true,
-                            url: true,
-                            artist: true,
-                            album: true
-                        }
-                    }
-                }
-            })
+            const album = await getAlbum(albumName)
 
             const data = {
                 album
@@ -39,4 +24,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .status(405)
             .json({ message: 'We only support GET' })
     }
+}
+
+export async function getAlbum(albumName: string) {
+    return await prisma.album.findFirst({
+        where: {
+            name: albumName
+        },
+        include: {
+            multitracks: {
+                select: {
+                    id: true,
+                    name: true,
+                    url: true,
+                    artist: true,
+                    album: true
+                }
+            }
+        }
+    })
 }
