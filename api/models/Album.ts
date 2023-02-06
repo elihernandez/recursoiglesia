@@ -8,4 +8,5 @@ export interface Album {
   artistId?: string
   artist?: Artist
   multitracks?: Array<Multitrack>
+  releaseDate: Date
 }

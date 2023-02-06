@@ -11,7 +11,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     name: artistName
                 },
                 include: {
-                    albums: true
+                    albums: {
+                        orderBy: {
+                            releaseDate: 'desc'
+                        }
+                    }
                 }
             })
 

@@ -25,6 +25,7 @@ model Album {
   artistId    String?
   artist      Artist?      @relation(fields: [artistId], references: [id])
   multitracks Multitrack[]
+  releaseDate DateTime     @db.Date
 }
 
 model Multitrack {
