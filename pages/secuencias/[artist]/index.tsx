@@ -11,7 +11,6 @@ import { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import { getArtist } from 'pages/api/artist/[name]'
 
-
 export default function ArtistPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
     const artist: Artist = JSON.parse(props.artist)
     const { name: artistName } = artist
