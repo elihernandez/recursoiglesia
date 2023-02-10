@@ -1,19 +1,12 @@
 import { prisma } from 'api/config/db'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { getMultitracksShortener } from '../acortador'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
-        const albumName: string = req.query?.name as string
-
         try {
-            const album = await getAlbum(albumName)
-
-            const data = {
-                album
-            }
-
             res.status(200)
-            res.json(data)
+            res.json({})
         } catch (e) {
             console.log(e)
             res.status(500)
@@ -26,21 +19,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 }
 
-export async function getAlbum(albumName: string) {
-    return await prisma.album.findFirst({
+export async function getAlbum(albumName: string, artistName: string) {
+    const album = await prisma.album.findFirst({
         where: {
-            name: albumName
+            AND: [
+                {
+                    name: {
+                        contains: albumName
+                    }
+                },
+                {
+                    artist: {
+                        name: {
+                            contains: artistName
+                        }
+                    }
+                }
+            ]
         },
         include: {
             multitracks: {
                 select: {
                     id: true,
                     name: true,
-                    url: true,
+                    songId: true,
                     artist: true,
-                    album: true
+                    album: true,
+                    shortener: {
+                        select: {
+                            link: true
+                        }
+                    }
                 }
             }
         }
     })
+
+    await getMultitracksShortener(album.multitracks)
+
+    return album
 }

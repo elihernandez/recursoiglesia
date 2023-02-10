@@ -5,12 +5,12 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
-        console.log(req.body)
         try {
             const multitrackRequest = await prisma.multitrackRequest.create({
                 data: {
                     email: req.body.email,
-                    multitrackId: req.body.multitrackId,
+                    songId: req.body.songId,
+                    name: req.body.name,
                     isSent: req.body.isSent
                 },
                 include: {

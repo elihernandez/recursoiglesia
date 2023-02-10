@@ -107,7 +107,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const album = await getAlbum(paramToStr(params.album))
+    const album = await getAlbum(paramToStr(params.album), paramToStr(params.artist))
 
     return {
         props: {

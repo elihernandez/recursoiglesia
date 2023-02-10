@@ -85,7 +85,6 @@ const artists = [
     // 'Brandon Lake',
     // 'Phil Wickham',
     // 'The Belonging Co',
-    // 'Kari Jobe',
     // 'North Point Worship',
 ]
 
@@ -119,8 +118,6 @@ const getData = async () => {
 
                 const albums = document.getElementById('albums').children[1].children[0].children
 
-                //await browser.close()
-
                 for (const album of albums) {
                     const albumId = uuidv4()
                     const link = album.children[0].href
@@ -139,8 +136,6 @@ const getData = async () => {
 
                     try {
                         console.log(`${baseUrl}${link}`)
-                        // var browser = await puppeteer.launch()
-                        // var page = await browser.newPage()
                         var response = await page.goto(`${baseUrl}${link}`)
                         var body = await response.text()
 
@@ -161,8 +156,6 @@ const getData = async () => {
                                 albumId: albumId
                             })
                         }
-
-                        //await browser.close()
                     } catch (error) {
                         console.log(`Ocurrió un problema al buscar información en: https://www.secuencias.com/artists/${strToParam(artist)}/${strToParam(strReplace(title))}/`)
                     }

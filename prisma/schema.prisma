@@ -30,14 +30,21 @@ model Album {
 
 model Multitrack {
   id                 String              @id @default(uuid())
+  songId             String              @unique
   name               String
-  url                String?
-  link               String?
+  shortener          Shortener?          @relation(fields: [songId], references: [id])
   album              Album?              @relation(fields: [albumId], references: [id])
   albumId            String?
   artist             Artist?             @relation(fields: [artistId], references: [id])
   artistId           String?
   multitrackRequests MultitrackRequest[]
+}
+
+model Shortener {
+  id         String      @id
+  name       String
+  link       String
+  multitrack Multitrack?
 }
 
 model Template {
@@ -62,10 +69,19 @@ model Software {
 }
 
 model MultitrackRequest {
-  id           String     @id @default(uuid())
-  email        String
-  multitrackId String
-  multitrack   Multitrack @relation(fields: [multitrackId], references: [id])
-  isSent       Boolean    @default(false)
-  createdAt    DateTime   @default(now())
+  id        String   @id @default(uuid())
+  email     String
+  songId    String
+  name      String
+  isSent    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  multitrack Multitrack @relation(fields: [songId], references: [songId])
+}
+
+model ResourceDownload {
+  id         String   @id @default(uuid())
+  resourceId String
+  name       String
+  createdAt  DateTime @default(now())
 }

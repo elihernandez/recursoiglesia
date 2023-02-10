@@ -12,6 +12,7 @@ import FagWidget from 'components/Widget/FaqWidget'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { limitPageMultitracks } from 'api/helpers/constants'
+import { InferGetStaticPropsType } from 'next'
 
 const link = '/secuencias'
 

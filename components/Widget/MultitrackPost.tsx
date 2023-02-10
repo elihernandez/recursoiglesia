@@ -1,5 +1,8 @@
 import { strToParam } from 'api/helpers/strings'
 import { Multitrack } from 'api/models/Multitrack'
+import { MultitrackRequest } from 'api/models/MultitrackRequest'
+import multitrackRequest from 'api/services/email/multitrackRequest'
+import resourceDownload from 'api/services/email/resourceDownload'
 import { capitalizeFirstLetter } from 'helpers/strings'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -7,8 +10,7 @@ import Modal from 'react-bootstrap/Modal'
 import Toast from 'react-bootstrap/Toast'
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Div from '../Div'
-import axios from 'axios'
-import { MultitrackRequest } from 'api/models/MultitrackRequest'
+import { ResourceDownload } from 'api/models/ResourceDownload'
 interface Props {
     title: string
     data: Array<Multitrack>
@@ -35,12 +37,13 @@ export default function MultitrackPost({ title, data }: Props) {
 
         const data: MultitrackRequest = {
             email: email,
-            multitrackId: multitrack.id,
+            songId: multitrack.songId,
+            name: multitrack.name,
             isSent: false
         }
 
         try {
-            const response = await axios.post('/api/email/multitrackRequest', data)
+            const response = await multitrackRequest(data)
             setMessage(response.data)
             handleCloseModal()
             handleShowMessage()
@@ -49,12 +52,25 @@ export default function MultitrackPost({ title, data }: Props) {
         }
     }
 
+    const handleClick = async (multitrack: Multitrack) => {
+        const data: ResourceDownload = {
+            resourceId: multitrack.songId,
+            name: `${multitrack.name}-${multitrack.album.name}-${multitrack.artist.name}`
+        }
+
+        try {
+            await resourceDownload(data)
+        } catch (e) {
+
+        }
+    }
+
     return (
         <>
             <Div>
                 <h4 className="cs-sidebar_widget_title">{capitalizeFirstLetter(title)}</h4>
                 <ul className="cs-recent_posts">
-                    {data?.map((item, index) => (
+                    {data?.map((item: Multitrack, index: number) => (
                         <li key={index}>
                             <Div className="row align-items-center">
                                 <Div
@@ -65,8 +81,8 @@ export default function MultitrackPost({ title, data }: Props) {
                                 </Div>
                                 <Div className="cs-recent_post_info col-7 col-lg-5">
                                     <h3 className="cs-recent_post_title">
-                                        {item.url != ''
-                                            ? <Link href={item.url} scroll={false}>{item.name}</Link>
+                                        {item?.shortener?.link
+                                            ? <Link href={item.shortener.link} scroll={false} target='_blank' onClick={() => handleClick(item)}>{item.name}</Link>
                                             : item.name
                                         }
                                     </h3>
@@ -77,7 +93,7 @@ export default function MultitrackPost({ title, data }: Props) {
                                     </Div>
                                 </Div>
                                 <Div className="col-2 col-lg-4">
-                                    {item.url != ''
+                                    {item?.shortener?.link
                                         ?
                                         <h6 className='pre'>Disponible</h6>
                                         :
