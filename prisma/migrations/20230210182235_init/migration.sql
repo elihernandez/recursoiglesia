@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE `Artist` (
     `id` VARCHAR(191) NOT NULL,
+    `url` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `imgUrl` VARCHAR(191) NOT NULL,
 
@@ -10,6 +11,7 @@ CREATE TABLE `Artist` (
 -- CreateTable
 CREATE TABLE `Album` (
     `id` VARCHAR(191) NOT NULL,
+    `url` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `imgUrl` VARCHAR(191) NOT NULL,
     `artistId` VARCHAR(191) NULL,

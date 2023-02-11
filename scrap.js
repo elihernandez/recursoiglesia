@@ -7,85 +7,85 @@ const wb = new xl.Workbook()
 const baseUrl = 'https://www.secuencias.com'
 
 const artists = [
-    // 'Aliento',
-    // 'Averly Morillo',
-    // 'Álvaro López',
-    // 'Art Aguilera',
-    // 'Bani Muñoz',
-    // 'Barak',
-    // 'Bethel Music',
-    // 'BJ Putnam',
-    // 'Camino de Vida',
-    // 'Chris Tomlin',
-    // "Christine D'Clario",
-    // 'Coalo Zamorano',
-    // 'Conquistando Fronteras',
-    // 'CTUE Adoración',
-    // 'Darlene Zschech',
-    // 'David Reyes',
-    // 'David Scarpeta',
-    // 'Elevation Worship',
-    // 'En Espíritu y en Verdad',
-    // 'Erick Porta',
-    // 'Evan Craft',
-    // 'Free Worship',
+    'Aliento',
+    'Averly Morillo',
+    'Álvaro López',
+    'Art Aguilera',
+    'Bani Muñoz',
+    'Barak',
+    'Bethel Music',
+    'BJ Putnam',
+    'Camino de Vida',
+    'Chris Tomlin',
+    "Christine D'Clario",
+    'Coalo Zamorano',
+    'Conquistando Fronteras',
+    'CTUE Adoración',
+    'Darlene Zschech',
+    'David Reyes',
+    'David Scarpeta',
+    'Elevation Worship',
+    'En Espíritu y en Verdad',
+    'Erick Porta',
+    'Evan Craft',
+    'Free Worship',
     'Gateway Worship',
-    // 'Gateway Worship Español',
-    // 'Generación 12',
-    // 'Hillsong United',
-    // 'Hillsong Young And Free',
-    // 'Hillsong en Español',
-    // 'Ingrid Rosario',
-    // 'Israel and New Breed',
-    // 'Jacobo Ramos',
-    // 'Jesús Adrian Romero',
-    // 'Jesus Culture',
-    // 'Jesus Worship Center',
-    // 'Job Gonzalez',
-    // 'Juan Carlos Alvarado',
-    // 'Julio Melgar',
-    // 'Julissa',
-    // 'Kari Jobe',
-    // 'Lakewood Music',
-    // 'LEAD',
-    // 'Living',
-    // 'Lowsan Melgar',
-    // 'Lucía Parker',
-    // 'Majo y Dan',
-    // 'Marco Barrientos',
-    // 'Marcos Brunet',
-    // 'Marcos Witt',
-    // 'Maverick City Música',
-    // 'Miel San Marcos',
-    // 'MONTESANTO',
-    // 'Mosaic MSC',
-    // 'Música Más Vida ',
-    // 'New Wine Worship',
-    // 'Passion',
-    // 'Planetshakers',
-    // 'Su Presencia',
-    // 'Thalles Roberto',
-    // 'Un Corazón',
-    // 'Danny Diaz',
-    // 'Church of The City',
-    // 'UPPERROOM',
-    // 'Toma Tu Lugar',
-    // 'Emir Sinsini',
-    // 'Ericson Alexander Molano',
-    // 'Danilo Montero',
-    // 'Soulfire Revolution',
-    // 'Yvonne Muñoz',
-    // 'TWICE',
-    // 'Vida Real Worship',
-    // 'Paz Aguayo',
-    // 'PRISMA',
-    // 'Edward Rivera',
-    // 'Apasionados Worship',
-    // 'Cody Carnes',
-    // 'Brandon Lake',
-    // 'Phil Wickham',
-    // 'The Belonging Co',
-    // 'North Point Worship',
+    'Gateway Worship Español',
+    'Generación 12',
+    'Hillsong United',
+    'Hillsong Young And Free',
+    'Hillsong en Español',
+    'Ingrid Rosario',
+    'Israel and New Breed',
+    'Jacobo Ramos',
+    'Jesús Adrian Romero',
+    'Jesus Culture',
+    'Jesus Worship Center',
+    'Job Gonzalez',
+    'Juan Carlos Alvarado',
+    'Julio Melgar',
+    'Julissa',
+    'Kari Jobe',
+    'Lakewood Music',
+    'LEAD',
+    'Living',
+    'Lowsan Melgar',
+    'Lucía Parker',
+    'Majo y Dan',
+    'Marco Barrientos',
+    'Marcos Brunet',
+    'Marcos Witt',
+    'Maverick City Música',
+    'Miel San Marcos',
+    'MONTESANTO',
+    'Mosaic MSC',
+    'Música Más Vida ',
+    'New Wine Worship',
+    'Passion',
+    'Planetshakers',
+    'Su Presencia',
+    'Thalles Roberto',
+    'Un Corazón',
+    'Danny Diaz',
+    'Church of The City',
+    'UPPERROOM',
+    'Toma Tu Lugar',
+    'Emir Sinsini',
+    'Ericson Alexander Molano',
+    'Danilo Montero',
+    'Soulfire Revolution',
+    'Yvonne Muñoz',
+    'TWICE',
+    'Vida Real Worship',
+    'Paz Aguayo',
+    'PRISMA',
+    'Edward Rivera',
+    'Apasionados Worship',
+    'Cody Carnes',
+    'Brandon Lake',
+    'Phil Wickham',
+    'The Belonging Co',
+    'North Point Worship',
 ]
 
 const arrArtist = []
@@ -102,7 +102,7 @@ const getData = async () => {
             index++
             console.log(`-Artista: ${artist}`)
             try {
-                var response = await page.goto(`${baseUrl}/artists/${strToParam(artist)}/albums/`)
+                var response = await page.goto(`${baseUrl}/artists/${strToParam(artist)}/albums/?page=1&size=45`)
                 var body = await response.text()
 
                 var { window: { document } } = new jsdom.JSDOM(body)
@@ -112,6 +112,7 @@ const getData = async () => {
 
                 arrArtist.push({
                     id: artistId,
+                    url: strToParam(artist),
                     name: artist,
                     imgUrl: artistImage
                 })
@@ -128,6 +129,7 @@ const getData = async () => {
 
                     arrAlbums.push({
                         id: albumId,
+                        url: link.split('/')[3],
                         name: title.replace('amp;', ''),
                         imgUrl: img,
                         artistId: artistId,
@@ -185,30 +187,34 @@ const getData = async () => {
 function createArtistSheet() {
     const ws = wb.addWorksheet('Artist')
     ws.cell(1, 1).string('id')
-    ws.cell(1, 2).string('name')
-    ws.cell(1, 3).string('imgUrl')
+    ws.cell(1, 2).string('url')
+    ws.cell(1, 3).string('name')
+    ws.cell(1, 4).string('imgUrl')
 
     arrArtist.forEach((artist, index) => {
         ws.cell(index + 2, 1).string(artist.id)
-        ws.cell(index + 2, 2).string(artist.name)
-        ws.cell(index + 2, 3).string(artist.imgUrl)
+        ws.cell(index + 2, 2).string(artist.url)
+        ws.cell(index + 2, 3).string(artist.name)
+        ws.cell(index + 2, 4).string(artist.imgUrl)
     })
 }
 
 function createAlbumsSheet() {
     const ws = wb.addWorksheet('Albums')
     ws.cell(1, 1).string('id')
-    ws.cell(1, 2).string('name')
-    ws.cell(1, 3).string('imgUrl')
-    ws.cell(1, 4).string('artistId')
-    ws.cell(1, 5).string('releaseDate')
+    ws.cell(1, 2).string('url')
+    ws.cell(1, 3).string('name')
+    ws.cell(1, 4).string('imgUrl')
+    ws.cell(1, 5).string('artistId')
+    ws.cell(1, 6).string('releaseDate')
 
     arrAlbums.forEach((album, index) => {
         ws.cell(index + 2, 1).string(album.id)
-        ws.cell(index + 2, 2).string(album.name)
-        ws.cell(index + 2, 3).string(album.imgUrl)
-        ws.cell(index + 2, 4).string(album.artistId)
-        ws.cell(index + 2, 5).string(album.releaseDate)
+        ws.cell(index + 2, 2).string(album.url)
+        ws.cell(index + 2, 3).string(album.name)
+        ws.cell(index + 2, 4).string(album.imgUrl)
+        ws.cell(index + 2, 5).string(album.artistId)
+        ws.cell(index + 2, 6).string(album.releaseDate)
     })
 }
 
@@ -231,6 +237,7 @@ function createMultitracksSheet() {
 
 function strReplace(str) {
     return str
+        .replace('amp;', '')
         .replace('&', 'And')
         .replace(' (En Vivo)', '')
         .replace('(En Vivo)', '')

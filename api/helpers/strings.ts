@@ -1,9 +1,18 @@
 
 export function strToParam(str: string): string {
-    return toNormalForm(str.replace(/\s/g, '-'))
+    return str
+        .replace(/\s/g, '-')
+    const newStr = str.replace(' - ', ' ')
+    return toNormalForm(newStr.replace(/\s/g, '-'))
 }
 
 export function paramToStr(str: string): string {
+    console.log(str
+        .replace(/-/g, ' ')
+        .replace('   ', ' - '))
+    return str
+        .replace(/-/g, ' ')
+        .replace('   ', ' - ')
     return toNormalForm(str.replace(/([?*+^$[\]\\{}|-])/g, ' '))
 }
 

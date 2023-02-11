@@ -19,43 +19,46 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 }
 
-export async function getAlbum(albumName: string, artistName: string) {
-    const album = await prisma.album.findFirst({
-        where: {
-            AND: [
-                {
-                    name: {
-                        contains: albumName
-                    }
-                },
-                {
-                    artist: {
-                        name: {
-                            contains: artistName
+export async function getAlbum(artistUrl: string, albumUrl: string) {
+    try {
+        const album = await prisma.album.findFirst({
+            where: {
+                AND: [
+                    {
+                        url: albumUrl
+                    },
+                    {
+                        artist: {
+                            url: artistUrl
                         }
                     }
-                }
-            ]
-        },
-        include: {
-            multitracks: {
-                select: {
-                    id: true,
-                    name: true,
-                    songId: true,
-                    artist: true,
-                    album: true,
-                    shortener: {
-                        select: {
-                            link: true
+                ]
+            },
+            include: {
+                artist: true,
+                multitracks: {
+                    select: {
+                        id: true,
+                        name: true,
+                        songId: true,
+                        artist: true,
+                        album: true,
+                        shortener: {
+                            select: {
+                                link: true
+                            }
                         }
                     }
                 }
             }
+        })
+
+        if (album.multitracks.length != 0 || album?.multitracks) {
+            await getMultitracksShortener(album.multitracks)
         }
-    })
 
-    await getMultitracksShortener(album.multitracks)
-
-    return album
+        return album
+    } catch (error) {
+        console.log(error)
+    }
 }

@@ -1,7 +1,7 @@
 import { prisma } from 'api/config/db'
 import { limitPageMultitracks } from 'api/helpers/constants'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getShortener } from 'pages/api/acortador'
+import { getMultitracksShortener, getShortener } from 'pages/api/acortador'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
@@ -28,12 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
             })
 
-            for (const multitrack of multitracks) {
-                if (multitrack.shortener) {
-                    const shortenedUrl = await getShortener(multitrack.songId)
-                    multitrack.shortener.link = shortenedUrl ? shortenedUrl.shortenedUrl : ''
-                }
-            }
+            await getMultitracksShortener(multitracks)
 
             const count = await prisma.multitrack.count()
 

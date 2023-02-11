@@ -12,6 +12,7 @@ datasource db {
 
 model Artist {
   id          String       @id @default(uuid())
+  url         String
   name        String
   imgUrl      String
   multitracks Multitrack[]
@@ -20,6 +21,7 @@ model Artist {
 
 model Album {
   id          String       @id @default(uuid())
+  url         String
   name        String
   imgUrl      String
   artistId    String?

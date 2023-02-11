@@ -83,13 +83,13 @@ export default function MultitrackPost({ title, data }: Props) {
                                     <h3 className="cs-recent_post_title">
                                         {item?.shortener?.link
                                             ? <Link href={item.shortener.link} scroll={false} target='_blank' onClick={() => handleClick(item)}>{item.name}</Link>
-                                            : item.name
+                                            : `${item.name}-${item.songId}`
                                         }
                                     </h3>
                                     <Div className="cs-recent_post_date cs-primary_40_color">
-                                        <Link href={`/secuencias/${strToParam(item.artist.name)}`} scroll={false}>{item.artist.name}</Link>
+                                        <Link href={`/secuencias/${item.artist.url}`} scroll={false}>{item.artist.name}</Link>
                                         &nbsp;-&nbsp;
-                                        <Link href={`/secuencias/${strToParam(item.artist.name)}/${strToParam(item.album.name)}`} scroll={false}>{item.album.name}</Link>
+                                        <Link href={`/secuencias/${item.artist.url}/${item.album.url}`} scroll={false}>{item.album.name}</Link>
                                     </Div>
                                 </Div>
                                 <Div className="col-2 col-lg-4">

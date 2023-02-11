@@ -25,19 +25,6 @@ export default function Document(props) {
                     onError={(e) => { console.error('Script failed to load', e) }}
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
                 />
-                <Script
-                    async
-                    id="acortaz-net"
-                    strategy='afterInteractive'
-                >
-                    {`
-                        var app_url = 'https://acortaz.net/';
-                        var app_api_token = '6dcb86b1ef0a8448c8143cfb7934bbd5b5ff90e1';
-                        var app_advert = 2;
-                        var app_domains = ["mega.nz","drive.google.com"];
-                    `}
-                </Script>
-                <Script async strategy='afterInteractive' src="https://acortaz.net/js/full-page.js" />
             </Head>
             <body>
                 <Main />

@@ -10,7 +10,7 @@ export default function Newsletter({ title, subtitle, placeholder }) {
         e.preventDefault()
 
         try {
-            const response = await axios.post('api/email', {
+            const response = await axios.post('/api/email', {
                 data: {
                     email: email
                 }

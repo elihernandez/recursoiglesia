@@ -25,6 +25,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 export async function getMultitracksShortener(multitracks) {
     return new Promise(async (resolve, reject) => {
+        if (multitracks.length === 0) {
+            resolve('')
+        }
+
         let i = 0
         for (const multitrack of multitracks) {
             i++

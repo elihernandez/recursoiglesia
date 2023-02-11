@@ -14,13 +14,13 @@ import { getAlbum } from 'pages/api/album/[name]'
 export default function AlbumPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
     const artist = props.artist
     const album = JSON.parse(props.album)
-    const { name: albumName } = album
 
     const getNamesMultitracks = (album: Album) => {
         const arr = []
-        album.multitracks.forEach((multitrack: Multitrack) => {
+
+        for (const multitrack of album.multitracks) {
             arr.push(multitrack.name)
-        })
+        }
 
         return arr.join(', ')
     }
@@ -28,15 +28,15 @@ export default function AlbumPage(props: InferGetStaticPropsType<typeof getStati
     return (
         <>
             <Head>
-                <title>{albumName} | Secuencias/Multitracks</title>
-                <meta name="description" content={`Secuencias/Multitracks gratis del álbum ${albumName} - ${artist}${album.multitracks.length === 0 ? '' : ': ' + getNamesMultitracks(album)}`} />
+                <title>{album.name} | Secuencias/Multitracks</title>
+                <meta name="description" content={`Secuencias/Multitracks gratis del álbum ${album.name} - ${artist.name}${album.multitracks.length === 0 ? '' : ': ' + getNamesMultitracks(album)}`} />
             </Head>
             <PageHeading
-                title={albumName}
+                title={album.name}
                 bgSrc='/images/portfolio_hero_bg.jpeg'
-                pageLinkPrev={`/secuencias/${strToParam(artist)}`}
-                pageTextPrev={artist}
-                pageLinkText={albumName}
+                pageLinkPrev={`/secuencias/${strToParam(artist.name)}`}
+                pageTextPrev={artist.name}
+                pageLinkText={album.name}
             />
             <Spacing lg='40' md='40' />
             <Div className="container" id="container">
@@ -45,7 +45,7 @@ export default function AlbumPage(props: InferGetStaticPropsType<typeof getStati
                         <Div className="cs-portfolio_1_heading">
                             <Div className="col-12 col-sm-6 col-lg-8">
                                 <SectionHeading
-                                    title={albumName}
+                                    title={album.name}
                                     subtitle='Secuencias'
                                 />
                             </Div>
@@ -98,20 +98,19 @@ export async function getStaticPaths() {
 
     artists.map((artist) => {
         artist.albums.map((album) => {
-            paths.push({ params: { artist: strToParam(artist.name), album: strToParam(album.name) } })
+            paths.push({ params: { artist: artist.url, album: album.url } })
         })
     })
-
 
     return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }) {
-    const album = await getAlbum(paramToStr(params.album), paramToStr(params.artist))
+    const album = await getAlbum(params.artist, params.album)
 
     return {
         props: {
-            artist: paramToStr(params.artist),
+            artist: album.artist,
             album: JSON.stringify(album)
         }
     }

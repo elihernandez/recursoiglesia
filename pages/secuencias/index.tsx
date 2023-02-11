@@ -80,7 +80,7 @@ export default function SecuenciasPage(props) {
                 setPage('1')
             }
             setData(null)
-        }, 2000)
+        }, 500)
     }
 
     useEffect(() => {

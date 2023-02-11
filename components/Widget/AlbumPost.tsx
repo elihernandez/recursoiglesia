@@ -16,18 +16,18 @@ export default function AlbumPost({ title, artist, data }: Props) {
         <>
             <h4 className="cs-sidebar_widget_title">{capitalizeFirstLetter(title)}</h4>
             <ul className="cs-recent_posts">
-                {data?.map((item, index) => (
+                {data?.map((album: Album, index: number) => (
                     <li key={index}>
                         <Div className="cs-recent_post">
                             <Div className="cs-recent_post_thumb">
-                                <Div className="cs-recent_post_thumb_in cs-bg" style={{ backgroundImage: `url(${item.imgUrl})` }} />
+                                <Div className="cs-recent_post_thumb_in cs-bg" style={{ backgroundImage: `url(${album.imgUrl})` }} />
                             </Div>
                             <Div className="cs-recent_post_info">
                                 <h3 className="cs-recent_post_title">
-                                    <Link href={`/secuencias/${strToParam(artist.name)}/${strToParam(item.name)}`} scroll={false}>{item.name}</Link>
+                                    <Link href={`/secuencias/${artist.url}/${album.url}`} scroll={false}>{album.name}</Link>
                                 </h3>
                                 <Div className="cs-recent_post_date cs-primary_40_color">
-                                    <Link href={`/secuencias/${strToParam(artist.name)}`} scroll={false}>{artist.name}</Link>
+                                    <Link href={`/secuencias/${artist.url}`} scroll={false}>{artist.name}</Link>
                                 </Div>
                             </Div>
                         </Div>

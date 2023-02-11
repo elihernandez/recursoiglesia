@@ -81,14 +81,14 @@ export async function getStaticPaths() {
     const artists = await prisma.artist.findMany({})
 
     const paths = artists.map((artist) => ({
-        params: { artist: strToParam(artist.name) },
+        params: { artist: artist.url },
     }))
 
     return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }) {
-    const artist = await getArtist(paramToStr(params.artist))
+    const artist = await getArtist(params.artist)
 
     return {
         props: {
