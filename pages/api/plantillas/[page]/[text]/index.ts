@@ -1,6 +1,7 @@
 import { prisma } from 'api/config/db'
 import { limitPageTemplates } from 'api/helpers/constants'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { getShortenedUrl } from 'pages/api/acortador'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
@@ -26,10 +27,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 select: {
                     id: true,
                     name: true,
+                    imgUrl: true,
                     url: true,
-                    imgUrl: true
+                    link: true
                 }
             })
+
+            for (const template of templates) {
+                try {
+                    const alias = template.link.split('/')[4].replace(/./g, '')
+                    const response = await getShortenedUrl(template.link, alias)
+                    const { shortenedUrl } = response.data
+                    template.link = shortenedUrl
+                } catch (e) {
+
+                }
+            }
 
             const count = await prisma.template.count({
                 where: {

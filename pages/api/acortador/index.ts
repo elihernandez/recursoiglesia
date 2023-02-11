@@ -52,9 +52,13 @@ export async function getShortener(songId: string) {
     })
 
     if (shortener) {
-        const response = await axios.get(`https://acortaz.net/api?api=${process.env.ACORTAZ_ID_TOKEN}&url=${shortener.link}&alias=${shortener.id}`)
+        const response = await getShortenedUrl(shortener.link, shortener.id)
         return response.data
     }
 
     return shortener
+}
+
+export async function getShortenedUrl(url: string, alias: string) {
+    return await axios.get(`https://acortaz.net/api?api=${process.env.ACORTAZ_ID_TOKEN}&url=${url}&alias=${alias}`)
 }

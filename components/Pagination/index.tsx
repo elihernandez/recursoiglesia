@@ -64,7 +64,7 @@ export default function Pagination({ pageActive, link, length, searchText, limit
                     {page}
                 </Link>}
                 pageRangeDisplayed={4}
-                marginPagesDisplayed={0}
+                marginPagesDisplayed={1}
                 pageCount={pageCount}
                 forcePage={pageActive}
                 renderOnZeroPageCount={null}

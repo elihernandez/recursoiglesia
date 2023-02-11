@@ -11,17 +11,18 @@ interface Props {
 }
 
 export default function TemplatePost({ title, data }: Props) {
+    console.log(data)
     return (
         <>
             <h4 className="cs-sidebar_widget_title">{capitalizeFirstLetter(title)}</h4>
             <Div className='row'>
-                {data?.map((item, index) => (
+                {data?.map((template: Template, index: number) => (
                     <Div key={index} className='col-lg-3 col-sm-6'>
-                        <Link target="_blank" href={item.url}>
+                        <Link target="_blank" href={template.link}>
                             <Team
-                                memberImage={item.imgUrl}
+                                memberImage={template.imgUrl}
                                 memberName=""
-                                memberDesignation={item.name}
+                                memberDesignation={template.name}
                                 memberSocial=""
                             />
                         </Link>
