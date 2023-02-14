@@ -33,17 +33,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
             })
 
-            for (const template of templates) {
-                try {
-                    const alias = template.link.split('/')[4].replace(/./g, '')
-                    const response = await getShortenedUrl(template.link, alias)
-                    const { shortenedUrl } = response.data
-                    template.link = shortenedUrl
-                } catch (e) {
-
-                }
-            }
-
             const count = await prisma.template.count({
                 where: {
                     OR: [
