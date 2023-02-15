@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import SocialWidget from '../Widget/SocialWidget'
+import { useEffect, useState } from 'react'
 import Newsletter from '../Widget/Newsletter'
-// import './header.scss'
-import ContactInfoWidget from '../Widget/ContactInfoWidget'
+import SocialWidget from '../Widget/SocialWidget'
 import Div from '../Div'
 import DropDown from './DropDown'
+import imgLogo from 'public/logo_white.png'
+import Image from 'next/image'
 
 export default function Header() {
     const [isSticky, setIsSticky] = useState(false)
@@ -30,7 +30,7 @@ export default function Header() {
                         <Div className="cs-main_header_in">
                             <Div className="cs-main_header_left">
                                 <Link className="cs-site_branding" href="/">
-                                    <img src="/logo_white.png" alt="Logo" width="80%" />
+                                    <Image alt="Logo recursoiglesia" src={imgLogo} width={200} />
                                 </Link>
                             </Div>
                             <Div className="cs-main_header_center">
