@@ -1,12 +1,8 @@
-import { albums } from './seeds/albums'
 import { prisma } from '../api/config/db'
-import { artists } from './seeds/artists'
-import { multitracks } from './seeds/multitracks'
+import { users } from './seeds/users'
 
 async function main() {
-    // await prisma.artist.createMany({ data: artists })
-    // await prisma.album.createMany({ data: albums })
-    // await prisma.multitrack.createMany({ data: multitracks })
+    await prisma.user.createMany({ data: users })
 }
 
 main()

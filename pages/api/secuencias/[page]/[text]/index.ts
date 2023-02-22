@@ -1,7 +1,7 @@
 import { prisma } from 'api/config/db'
 import { limitPageMultitracks } from 'api/helpers/constants'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getMultitracksShortener, getShortener } from 'pages/api/acortador'
+import { getMultitracksShortener } from 'pages/api/acortador'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
