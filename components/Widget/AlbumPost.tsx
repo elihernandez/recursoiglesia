@@ -1,9 +1,9 @@
-import { strToParam } from 'api/helpers/strings'
 import { Album } from 'api/models/Album'
+import { Artist } from 'api/models/Artist'
 import { capitalizeFirstLetter } from 'helpers/strings'
 import Link from 'next/link'
+import Image from 'next/image'
 import Div from '../Div'
-import { Artist } from 'api/models/Artist'
 
 interface Props {
     title: string,
@@ -16,13 +16,13 @@ export default function AlbumPost({ title, artist, data }: Props) {
         <>
             <h4 className="cs-sidebar_widget_title">{capitalizeFirstLetter(title)}</h4>
             <ul className="cs-recent_posts">
-                {data?.map((album: Album, index: number) => (
-                    <li key={index}>
-                        <Div className="cs-recent_post">
-                            <Div className="cs-recent_post_thumb">
-                                <Div className="cs-recent_post_thumb_in cs-bg" style={{ backgroundImage: `url(${album.imgUrl})` }} />
+                {data?.map((album: Album) => (
+                    <li key={album.name}>
+                        <Div className="row align-items-center">
+                            <Div className="col-3 col-md-2 col-lg-1">
+                                <Image src={album.imgUrl} alt={album.name} width={100} height={100} style={{ position: 'relative' }} />
                             </Div>
-                            <Div className="cs-recent_post_info">
+                            <Div className="cs-recent_post_info col">
                                 <h3 className="cs-recent_post_title">
                                     <Link href={`/secuencias/${artist.url}/${album.url}`} scroll={false}>{album.name}</Link>
                                 </h3>

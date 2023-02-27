@@ -11,7 +11,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'GET') {
         try {
-            const downloads = await prisma.resourceDownload.findMany({})
+            const downloads = await prisma.resourceDownload.findMany({
+                orderBy: {
+                    createdAt: 'desc'
+                }
+            })
             res.status(200)
             res.json(downloads)
         } catch (e) {

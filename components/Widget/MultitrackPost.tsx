@@ -1,16 +1,16 @@
-import { strToParam } from 'api/helpers/strings'
 import { Multitrack } from 'api/models/Multitrack'
 import { MultitrackRequest } from 'api/models/MultitrackRequest'
+import { ResourceDownload } from 'api/models/ResourceDownload'
 import multitrackRequest from 'api/services/email/multitrackRequest'
 import resourceDownload from 'api/services/email/resourceDownload'
 import { capitalizeFirstLetter } from 'helpers/strings'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Toast from 'react-bootstrap/Toast'
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Div from '../Div'
-import { ResourceDownload } from 'api/models/ResourceDownload'
 interface Props {
     title: string
     data: Array<Multitrack>
@@ -70,41 +70,40 @@ export default function MultitrackPost({ title, data }: Props) {
             <Div>
                 <h4 className="cs-sidebar_widget_title">{capitalizeFirstLetter(title)}</h4>
                 <ul className="cs-recent_posts">
-                    {data?.map((item: Multitrack, index: number) => (
-                        <li key={index}>
+                    {data?.map((item: Multitrack) => (
+                        <li key={item.id}>
                             <Div className="row align-items-center">
-                                <Div
-                                    className="cs-recent_post_thumb col-2 col-lg-2"
-                                    style={{ paddingRight: 0, paddingLeft: 0, marginTop: 0 }}
-                                >
-                                    <Div className="cs-recent_post_thumb_in cs-bg" style={{ backgroundImage: `url(${item.album.imgUrl})` }} />
+                                <Div className="col-3 col-md-2">
+                                    <Image src={item.album.imgUrl} alt={item.album.name} width={100} height={100} style={{ position: 'relative' }} />
                                 </Div>
-                                <Div className="cs-recent_post_info col-7 col-lg-5">
-                                    <h3 className="cs-recent_post_title">
-                                        {item?.shortener?.link
-                                            ? <Link href={item.shortener.link} scroll={false} target='_blank' onClick={() => handleClick(item)}>{item.name}</Link>
-                                            : `${item.name}`
-                                        }
-                                    </h3>
-                                    <Div className="cs-recent_post_date cs-primary_40_color">
-                                        <Link href={`/secuencias/${item.artist.url}`} scroll={false}>{item.artist.name}</Link>
-                                        &nbsp;-&nbsp;
-                                        <Link href={`/secuencias/${item.artist.url}/${item.album.url}`} scroll={false}>{item.album.name}</Link>
+                                <Div className="cs-recent_post_info col-5 col-md-8">
+                                    <Div className="row">
+                                        <h3 className="cs-recent_post_title">
+                                            {item?.shortener?.link
+                                                ? <Link href={item.shortener.link} scroll={false} target='_blank' onClick={() => handleClick(item)}>{item.name}</Link>
+                                                : `${item.name}`
+                                            }
+                                        </h3>
+                                        <Div className="cs-recent_post_date cs-primary_40_color">
+                                            <Link href={`/secuencias/${item.artist.url}`} scroll={false}>{item.artist.name}</Link>
+                                            &nbsp;-&nbsp;
+                                            <Link href={`/secuencias/${item.artist.url}/${item.album.url}`} scroll={false}>{item.album.name}</Link>
+                                        </Div>
                                     </Div>
                                 </Div>
-                                <Div className="col-2 col-lg-4">
-                                    {item?.shortener?.link
-                                        ?
-                                        <h6 className='pre'>Disponible</h6>
-                                        :
-                                        <button
-                                            type="button"
-                                            className='btn-primary'
-                                            onClick={() => handleShowModal(item)}
-                                        >
-                                            <span>Solicitar</span>
-                                        </button>
-                                    }
+                                <Div className="col-4 col-md-2">
+                                    <Div style={{ display: 'flex', justifyContent: 'end' }}>
+                                        {item?.shortener?.link
+                                            ? <h6 className='pre'>Disponible</h6>
+                                            : <button
+                                                type="button"
+                                                className='btn-primary'
+                                                onClick={() => handleShowModal(item)}
+                                            >
+                                                <span>Solicitar</span>
+                                            </button>
+                                        }
+                                    </Div>
                                 </Div>
                             </Div>
                         </li>
@@ -157,32 +156,3 @@ export default function MultitrackPost({ title, data }: Props) {
         </>
     )
 }
-
-// export default function MultitrackPost({ title, data }: Props) {
-//     return (
-//         <>
-//             <h4 className="cs-sidebar_widget_title">{capitalizeFirstLetter(title)}</h4>
-//             <ul className="cs-recent_posts">
-//                 {data?.map((item, index) => (
-//                     <li key={index}>
-//                         <Div className="cs-recent_post">
-//                             <Div className="cs-recent_post_thumb">
-//                                 <Div className="cs-recent_post_thumb_in cs-bg" style={{ backgroundImage: `url(${item.album.imgUrl})` }} />
-//                             </Div>
-//                             <Div className="cs-recent_post_info">
-//                                 <h3 className="cs-recent_post_title">
-//                                     <Link href={item.url} scroll={false}>{item.name}</Link>
-//                                 </h3>
-//                                 <Div className="cs-recent_post_date cs-primary_40_color">
-//                                     <Link href={`/secuencias/${strToParam(item.artist.name)}`} scroll={false}>{item.artist.name}</Link>
-//                                     &nbsp;-&nbsp;
-//                                     <Link href={`/secuencias/${strToParam(item.artist.name)}/${strToParam(item.album.name)}`} scroll={false}>{item.album.name}</Link>
-//                                 </Div>
-//                             </Div>
-//                         </Div>
-//                     </li>
-//                 ))}
-//             </ul>
-//         </>
-//     )
-// }

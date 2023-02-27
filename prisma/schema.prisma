@@ -47,6 +47,7 @@ model Shortener {
   name       String
   link       String
   multitrack Multitrack?
+  createdAt  DateTime    @default(now())
 }
 
 model Template {

@@ -5,4 +5,5 @@ export interface Shortener {
     name: string
     link: string
     multitrack?: Multitrack
+    createdAt?: Date
 }

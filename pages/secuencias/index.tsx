@@ -1,3 +1,4 @@
+import { limitPageMultitracks } from 'api/helpers/constants'
 import { Multitrack } from 'api/models/Multitrack'
 import axios from 'axios'
 import Div from 'components/Div'
@@ -5,14 +6,14 @@ import PageHeading from 'components/PageHeading'
 import Pagination from 'components/Pagination'
 import SectionHeading from 'components/SectionHeading'
 import Spacing from 'components/Spacing'
+import ArtistTagWidget from 'components/Widget/ArtistTagWidget'
+import FagWidget from 'components/Widget/FaqWidget'
 import MultitrackPost from 'components/Widget/MultitrackPost'
 import SearchWidget from 'components/Widget/SearchWidget'
+import { useMediaQueries } from 'hooks/useMediaQueries'
 import Head from 'next/head'
-import FagWidget from 'components/Widget/FaqWidget'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
-import { limitPageMultitracks } from 'api/helpers/constants'
-import { InferGetStaticPropsType } from 'next'
 
 const link = '/secuencias'
 
@@ -22,6 +23,7 @@ type stateProps = {
 }
 
 export default function SecuenciasPage(props) {
+    const { isTablet } = useMediaQueries()
     const router = useRouter()
     const timerRef = useRef(null)
 
@@ -125,6 +127,7 @@ export default function SecuenciasPage(props) {
                 <Div className="row">
                     <Div className="col-lg-12">
                         <Div className="cs-portfolio_1_heading">
+                            <Spacing lg='80' md='40' />
                             <Div className="col-12 col-sm-6 col-lg-8">
                                 <SectionHeading
                                     title='Secuencias'
@@ -160,16 +163,35 @@ export default function SecuenciasPage(props) {
                             </div>
                         </Div>
                     </Div>
-                    : <MultitracksList active={active} data={data} page={page} search={search} />
+                    : <Div className="row justify-content-between">
+                        <Div className="col-lg-7">
+                            <MultitracksList active={active} data={data} page={page} search={search} />
+                        </Div>
+                        {isTablet &&
+                            <Div className="col-lg-4">
+                                <ArtistTagWidget title="Artistas populares" />
+                            </Div>
+                        }
+                        {data?.count &&
+                            <Div className="col-lg-12">
+                                <Pagination
+                                    link={link}
+                                    length={data.count}
+                                    searchText={search}
+                                    pageActive={page ? parseInt(page) : 1}
+                                    limit={limitPageMultitracks}
+                                />
+                            </Div>
+                        }
+                    </Div >
                 }
                 <FagWidget />
-            </Div>
+            </Div >
         </>
     )
 }
 
 const MultitracksList = ({ active, data, page, search }) => {
-
     if (data?.multitracks.length === 0 && data?.count === 0) {
         return <Div>
             No se encontraron resultados {search != '' ? `para '${search}'` : ''}
@@ -180,16 +202,7 @@ const MultitracksList = ({ active, data, page, search }) => {
         <Div>
             <MultitrackPost title={search != '' ? `Resultados de '${search}'` : active} data={data?.multitracks} />
             <Spacing lg='80' md='40' />
-            {data?.count &&
-                <Pagination
-                    link={link}
-                    length={data.count}
-                    searchText={search}
-                    pageActive={page ? parseInt(page) : 1}
-                    limit={limitPageMultitracks}
-                />
-            }
-            <Spacing lg='40' md='40' />
         </Div>
     )
+
 }

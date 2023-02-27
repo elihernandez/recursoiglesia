@@ -13,7 +13,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'GET') {
         try {
-            const shorteners = await prisma.shortener.findMany({})
+            const shorteners = await prisma.shortener.findMany({
+                orderBy: {
+                    createdAt: 'desc'
+                }
+            })
             res.status(200)
             res.json(shorteners)
         } catch (e) {

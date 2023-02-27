@@ -13,6 +13,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'GET') {
         try {
             const multitrackRequests = await prisma.multitrackRequest.findMany({
+                orderBy: {
+                    createdAt: 'desc'
+                },
                 include: {
                     multitrack: {
                         include: {

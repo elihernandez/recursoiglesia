@@ -51,21 +51,11 @@ export default function AlbumPage(props: InferGetStaticPropsType<typeof getStati
                             </Div>
                         </Div>
                     </Div>
-                </Div>
-                <Spacing lg='80' md='40' />
-                {/* {isLoading
-                    ?
-                    <Div className="container">
-                        <Div className="row justify-content-center">
-                            <Spacing lg='50' md='50' />
-                            <div className="spinner-border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </div>
-                        </Div>
+                    <Spacing lg='80' md='40' />
+                    <Div className="col-12 col-md-11 col-lg-6">
+                        <MultitracksList data={album.multitracks} />
                     </Div>
-                    : <MultitracksList data={album.multitracks} />
-                } */}
-                <MultitracksList data={album.multitracks} />
+                </Div>
             </Div>
         </>
     )
