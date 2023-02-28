@@ -5,7 +5,7 @@ import Spacing from 'components/Spacing'
 export default function FagWidget() {
     return (
         <Div>
-            <Spacing lg='80' md='40' />
+            <Spacing lg='130' md='75' />
             <h2 className="cs-faq_nav_title cs-m0" style={{ textAlign: 'center' }}>Preguntas frecuentes</h2>
             <Spacing lg='40' md='20' />
             <Div className="row justify-content-center">
@@ -13,7 +13,7 @@ export default function FagWidget() {
                     <Accordion />
                 </Div>
             </Div>
-            <Spacing lg='40' md='20' />
+            <Spacing lg='130' md='75' />
         </Div>
     )
 }

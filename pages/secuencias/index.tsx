@@ -12,6 +12,7 @@ import MultitrackPost from 'components/Widget/MultitrackPost'
 import SearchWidget from 'components/Widget/SearchWidget'
 import { useMediaQueries } from 'hooks/useMediaQueries'
 import Head from 'next/head'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
@@ -124,6 +125,13 @@ export default function SecuenciasPage(props) {
             />
             <Spacing lg='40' md='40' />
             <Div className="container" id="container">
+                <Spacing lg='50' md='50' />
+                <Div className="row">
+                    <Div className="col-lg-12">
+                        <LastMultitracks />
+                    </Div>
+                </Div>
+                <Spacing lg='100' md='40' />
                 <Div className="row">
                     <Div className="col-lg-12">
                         <Div className="cs-portfolio_1_heading">
@@ -205,4 +213,99 @@ const MultitracksList = ({ active, data, page, search }) => {
         </Div>
     )
 
+}
+
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import { Shortener } from 'api/models/Shortener'
+import Link from 'next/link'
+
+const LastMultitracks = () => {
+    const [data, setData] = useState<Shortener[]>([])
+
+    const settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        swipe: true,
+        responsive: [
+            {
+                breakpoint: 1224,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                    infinite: false,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: false,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: false,
+                    dots: true
+                }
+            }
+        ]
+    }
+
+    const getData = async () => {
+        const response = await axios.get('/api/acortador/lasts')
+        setData(response.data)
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    return (
+        <div>
+            <h4 className="cs-sidebar_widget_title">Últimas agregadas</h4>
+            {data.length > 0 ?
+                <Slider {...settings}>
+                    {data.map((shortener: Shortener, index: number) =>
+                        <Div key={shortener.id}>
+                            <Div style={{ padding: '16px' }}>
+                                <Link href={shortener.link} scroll={false} target='_blank'>
+                                    <Image
+                                        src={shortener.multitrack.album.imgUrl}
+                                        alt={shortener.multitrack.name}
+                                        width={100} height={100}
+                                        style={{ position: 'relative', width: '100%' }}
+                                    />
+                                </Link>
+                                <h3 className='cs-recent_post_title' style={{ fontSize: '16px', marginTop: '8px' }}>
+                                    <Link href={shortener.link} scroll={false} target='_blank'>{shortener.multitrack.name}</Link>
+                                </h3>
+                                <Div className="cs-recent_post_date cs-primary_40_color">
+                                    <Link href={`/secuencias/${shortener.multitrack.artist.url}`} scroll={false}>{shortener.multitrack.artist.name}</Link>
+                                    &nbsp;-&nbsp;
+                                    <Link href={`/secuencias/${shortener.multitrack.artist.url}/${shortener.multitrack.album.url}`} scroll={false}>{shortener.multitrack.album.name}</Link>
+                                </Div>
+                            </Div>
+                        </Div>
+                    )}
+                </Slider>
+                :
+                <Div className="row justify-content-center" style={{ marginTop: '120px', marginBottom: '120px' }}>
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </Div>
+            }
+        </div>
+    )
 }
