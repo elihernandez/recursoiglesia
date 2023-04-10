@@ -16,11 +16,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'GET') {
         try {
-            // pushAlbum()
             await script()
             res.status(200)
+            res.json(data)
             res.json('La información se cargó correctamente.')
-            //res.json(data)
         } catch (e) {
             console.log(e)
             res.status(400)
@@ -272,3 +271,47 @@ async function pushData() {
         })
     }
 }
+
+// async function pushData() {
+//     const multitracksRequests: any = data[5].data
+//     await prisma.multitrackRequest.deleteMany({})
+
+//     for (const multitrackRequest of multitracksRequests) {
+//         await prisma.multitrackRequest.createMany({
+//             data: {
+//                 id: multitrackRequest.id,
+//                 email: multitrackRequest.email,
+//                 multitrackId: multitrackRequest.songId,
+//                 isSent: multitrackRequest.isSent === '1' ? true : false,
+//                 createdAt: new Date(multitrackRequest.createdAt)
+//             }
+//         })
+//     }
+
+//     const downloads: any = data[6].data
+//     await prisma.download.deleteMany({})
+
+//     for (const download of downloads) {
+//         await prisma.download.createMany({
+//             data: {
+//                 id: download.id,
+//                 resourceId: download.resourceId,
+//                 type: ResourceType.MULTITRACK,
+//                 createdAt: new Date(download.createdAt)
+//             }
+//         })
+//     }
+
+//     const subscribers: any = data[9].data
+//     await prisma.newsletterSubscriber.deleteMany({})
+
+//     for (const subscriber of subscribers) {
+//         await prisma.newsletterSubscriber.createMany({
+//             data: {
+//                 id: subscriber.id,
+//                 email: subscriber.email,
+//                 createdAt: new Date(subscriber.createdAt)
+//             }
+//         })
+//     }
+// }
