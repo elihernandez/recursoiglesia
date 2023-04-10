@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const multitrackRequest = await prisma.multitrackRequest.create({
                 data: {
                     email: req.body.email,
-                    songId: req.body.songId,
+                    multitrackId: req.body.multitrackId,
                     name: req.body.name,
                     isSent: req.body.isSent
                 },

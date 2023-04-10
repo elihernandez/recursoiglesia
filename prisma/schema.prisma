@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,7 +9,7 @@ datasource db {
 
 model Artist {
   id          String       @id @default(uuid())
-  url         String
+  path        String?
   name        String
   imgUrl      String
   multitracks Multitrack[]
@@ -21,37 +18,42 @@ model Artist {
 
 model Album {
   id          String       @id @default(uuid())
-  url         String
+  path        String?
   name        String
   imgUrl      String
   artistId    String?
+  releaseDate DateTime     @db.Date
   artist      Artist?      @relation(fields: [artistId], references: [id])
   multitracks Multitrack[]
-  releaseDate DateTime     @db.Date
 }
 
 model Multitrack {
-  id                 String              @id @default(uuid())
-  songId             String              @unique
+  id                 String              @id @unique @default(uuid())
+  multitrackId       String              @unique
+  path               String?
   name               String
-  shortener          Shortener?          @relation(fields: [songId], references: [id])
-  album              Album?              @relation(fields: [albumId], references: [id])
   albumId            String?
-  artist             Artist?             @relation(fields: [artistId], references: [id])
   artistId           String?
+  url                String?
+  link               String?
+  urlDate            DateTime?           @db.Date
+  artist             Artist?             @relation(fields: [artistId], references: [id])
+  album              Album?              @relation(fields: [albumId], references: [id])
   multitrackRequests MultitrackRequest[]
-}
-
-model Shortener {
-  id         String      @id
-  name       String
-  link       String
-  multitrack Multitrack?
-  createdAt  DateTime    @default(now())
 }
 
 model Template {
   id     String  @id @default(uuid())
+  path   String?
+  name   String
+  imgUrl String
+  url    String?
+  link   String?
+}
+
+model Software {
+  id     String  @id @default(uuid())
+  path   String?
   name   String
   imgUrl String
   url    String?
@@ -66,34 +68,55 @@ model User {
   createdAt DateTime @default(now())
 }
 
-model Subscriber {
+model NewsletterSubscriber {
   id        String   @id @default(uuid())
   email     String   @unique()
   createdAt DateTime @default(now())
 }
 
-model Software {
-  id     String  @id @default(uuid())
-  name   String
-  imgUrl String
-  url    String?
-  link   String?
-}
-
 model MultitrackRequest {
-  id        String   @id @default(uuid())
-  email     String
-  songId    String
-  name      String
-  isSent    Boolean  @default(false)
-  createdAt DateTime @default(now())
+  id           String   @id @default(uuid())
+  email        String
+  multitrackId String
+  isSent       Boolean  @default(false)
+  createdAt    DateTime @default(now())
 
-  multitrack Multitrack @relation(fields: [songId], references: [songId])
+  multitrack Multitrack? @relation(fields: [multitrackId], references: [multitrackId])
 }
 
-model ResourceDownload {
+model Download {
   id         String   @id @default(uuid())
   resourceId String
-  name       String
+  type       Int
   createdAt  DateTime @default(now())
+}
+
+model Product {
+  id          Int                   @id @default(autoincrement())
+  path        String?
+  name        String
+  description String?
+  price       Float
+  link        String
+  images      Json?
+  isActive    Boolean?              @default(true)
+  categories  CategoriesOnProduct[]
+}
+
+model Category {
+  id          Int                   @id @default(autoincrement())
+  path        String?
+  name        String
+  description String?
+  isActive    Boolean?              @default(true)
+  products    CategoriesOnProduct[]
+}
+
+model CategoriesOnProduct {
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  @@id([productId, categoryId])
 }

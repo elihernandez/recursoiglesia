@@ -1,14 +1,17 @@
 {
   "name": "recursoiglesia",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3002",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3002",
     "lint": "next lint",
     "studio": "npx prisma studio",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev",
+    "migrate:reset": "dotenv -e .env.development -- npx prisma migrate reset --force",
+    "db:data": "dotenv -e .env.development node dbdata.js"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -25,6 +28,7 @@
     "bcryptjs": "2.4.3",
     "bootstrap": "5.2.2",
     "cookies-next": "2.1.1",
+    "dotenv-cli": "^7.1.0",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.6",
     "excel4node": "1.8.0",
@@ -33,6 +37,7 @@
     "next": "13.1.6",
     "next-sitemap": "3.1.49",
     "nextjs-cors": "2.1.2",
+    "node-pushover": "^1.0.0",
     "nodemailer": "6.9.0",
     "puppeteer": "19.6.3",
     "react": "18.2.0",
@@ -43,13 +48,15 @@
     "react-router-dom": "6.6.2",
     "react-slick": "0.29.0",
     "sass": "1.57.1",
+    "sharp": "^0.31.3",
     "slick-carousel": "1.8.1",
     "swr": "2.0.0",
     "typescript": "4.9.4",
     "uuid": "9.0.0",
     "uuidv4": "6.2.13",
     "web-vitals": "2.1.4",
-    "xlsx": "0.18.5"
+    "xlsx": "0.18.5",
+    "zustand": "^4.3.6"
   },
   "devDependencies": {
     "@iconify/react": "4.0.0",

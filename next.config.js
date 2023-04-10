@@ -2,20 +2,15 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['mtracks.azureedge.net'],
+        domains: ['mtracks.azureedge.net', 'm.media-amazon.com', 'ik.imagekit.io', 'files.sundaysocial.tv'],
     },
     eslint: {
-        // Warning: This allows production builds to successfully complete even if
-        // your project has ESLint errors.
-        ignoreDuringBuilds: true,
+        ignoreDuringBuilds: true
     },
     typescript: {
-        // !! WARN !!
-        // Dangerously allow production builds to successfully complete even if
-        // your project has type errors.
-        // !! WARN !!
-        ignoreBuildErrors: true,
-    }
+        ignoreBuildErrors: true
+    },
+    productionBrowserSourceMaps: true
 }
 
 module.exports = nextConfig

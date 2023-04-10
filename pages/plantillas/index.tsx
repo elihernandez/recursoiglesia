@@ -87,9 +87,9 @@ export default function PlantillasPage(props) {
             setIsLoading(true)
             let response
             if (!search) {
-                response = await axios.get(`api/plantillas/${page ? page : 1}`)
+                response = await axios.get(`api/template/${page ? page : 1}`)
             } else {
-                response = await axios.get(`api/plantillas/${page ? page : 1}/${search}`)
+                response = await axios.get(`api/template/${page ? page : 1}/${search}`)
             }
 
             setData(response.data)
@@ -131,7 +131,7 @@ export default function PlantillasPage(props) {
                                 />
                             </Div>
                             <Div className="col-12 col-sm-6 col-lg-4">
-                                <SearchWidget title="Buscar" onChangeText={onChangeText} />
+                                <SearchWidget placeholder="Buscar" onChangeText={onChangeText} />
                             </Div>
                             {/* <Div className="cs-filter_menu cs-style1">
                                 <ul className="cs-mp0 cs-center">

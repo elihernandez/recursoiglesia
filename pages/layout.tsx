@@ -1,12 +1,19 @@
 import Header from 'components/Header'
 import Footer from 'components/Footer'
+import { Maintenance } from 'components/Maintenance'
+import { isMaintenance } from 'api/helpers/constants'
 
 export default function Layout({ children }) {
     return (
         <>
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            {!isMaintenance && <Header />}
+            <main>
+                {isMaintenance
+                    ? <Maintenance />
+                    : children
+                }
+            </main>
+            {!isMaintenance && <Footer />}
         </>
     )
 }

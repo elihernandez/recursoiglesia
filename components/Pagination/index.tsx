@@ -2,13 +2,15 @@ import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import ReactPaginate from 'react-paginate'
 
-interface Props {
+type PaginationProps = {
+    pageActive?: number
     link: string
-    pageActive?: string
     length: number
+    searchText: string
+    limit: number
 }
 
-export default function Pagination({ pageActive, link, length, searchText, limit }) {
+export default function Pagination({ pageActive, link, length, searchText, limit }: PaginationProps) {
     const pageCount: number = Math.ceil(length / limit)
 
     const getHref = (number: number) => {
@@ -33,7 +35,7 @@ export default function Pagination({ pageActive, link, length, searchText, limit
         }
 
         return <li>
-            <Link scroll={true} href={getHref(pageActive - 1)} className="cs-pagination_item cs-center">
+            <Link scroll={false} href={getHref(pageActive - 1)} className="cs-pagination_item cs-center">
                 <Icon icon="akar-icons:chevron-left" />
             </Link>
         </li>
@@ -45,7 +47,7 @@ export default function Pagination({ pageActive, link, length, searchText, limit
         }
 
         return <li>
-            <Link scroll={true} href={getHref(pageActive + 1)} className="cs-pagination_item cs-center">
+            <Link scroll={false} href={getHref(pageActive + 1)} className="cs-pagination_item cs-center">
                 <Icon icon="akar-icons:chevron-right" />
             </Link>
         </li>

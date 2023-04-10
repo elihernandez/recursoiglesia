@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Div from '../Div'
 // import './post.scss'
 
-export default function Post({url, src, alt, date, title}) {
+export default function Post({ url, src, alt, date, title }) {
   return (
     <Div className="cs-post cs-style1">
       <Link to={url} className="cs-post_thumb">

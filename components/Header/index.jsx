@@ -30,7 +30,7 @@ export default function Header() {
                         <Div className="cs-main_header_in">
                             <Div className="cs-main_header_left">
                                 <Link className="cs-site_branding" href="/">
-                                    <Image alt="Logo recursoiglesia" src={imgLogo} width={200} />
+                                    <Image priority alt="Logo recursoiglesia" src={imgLogo} width={200} height={93} />
                                 </Link>
                             </Div>
                             <Div className="cs-main_header_center">
@@ -80,7 +80,7 @@ export default function Header() {
                 <Div className="cs-side_header_in">
                     <Div className="cs-side_header_shape" />
                     <Link className="cs-site_branding" href="/">
-                        <img src="/logo_white.png" alt="Logo" width="80%" />
+                        <Image priority alt="Logo recursoiglesia" src={imgLogo} width={200} height={93} />
                     </Link>
                     {/* <Div className="cs-side_header_box">
             <h2 className="cs-side_header_heading">Do you have a project in your  <br /> mind? Keep connect us.</h2>

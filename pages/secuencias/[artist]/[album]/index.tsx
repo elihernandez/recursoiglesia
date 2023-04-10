@@ -15,6 +15,8 @@ export default function AlbumPage(props: InferGetStaticPropsType<typeof getStati
     const artist = props.artist
     const album = JSON.parse(props.album)
 
+    console.log(album)
+
     const getNamesMultitracks = (album: Album) => {
         const arr = []
 
@@ -79,8 +81,13 @@ const MultitracksList = ({ data }: { data: Array<Multitrack> }) => {
 
 export async function getStaticPaths() {
     const artists = await prisma.artist.findMany({
-        include: {
-            albums: true
+        select: {
+            path: true,
+            albums: {
+                select: {
+                    path: true
+                }
+            }
         }
     })
 
@@ -88,7 +95,7 @@ export async function getStaticPaths() {
 
     artists.map((artist) => {
         artist.albums.map((album) => {
-            paths.push({ params: { artist: artist.url, album: album.url } })
+            paths.push({ params: { artist: artist.path, album: album.path } })
         })
     })
 

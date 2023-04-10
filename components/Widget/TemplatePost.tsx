@@ -1,9 +1,11 @@
+import { ResourceType } from 'api/models/ResourceType'
+import { Template } from 'api/models/Template'
+import downloadService from 'api/services/download'
+import Spacing from 'components/Spacing'
+import { capitalizeFirstLetter } from 'helpers/strings'
+import Image from 'next/legacy/image'
 import Link from 'next/link'
 import Div from '../Div'
-import { capitalizeFirstLetter } from 'helpers/strings'
-import { Template } from 'api/models/Template'
-import Team from 'components/Team'
-import Spacing from 'components/Spacing'
 
 interface Props {
     title: string
@@ -11,42 +13,27 @@ interface Props {
 }
 
 export default function TemplatePost({ title, data }: Props) {
-    console.log(data)
     return (
         <>
             <h4 className="cs-sidebar_widget_title">{capitalizeFirstLetter(title)}</h4>
             <Div className='row'>
                 {data?.map((template: Template, index: number) => (
-                    <Div key={index} className='col-lg-3 col-sm-6'>
-                        <Link target="_blank" href={template.link}>
-                            <Team
-                                memberImage={template.imgUrl}
-                                memberName=""
-                                memberDesignation={template.name}
-                                memberSocial=""
-                            />
+                    <Div key={template.id} className='col-lg-3 col-sm-6'>
+                        <Link target="_blank" href={template.link} onClick={() => downloadService(template.id, ResourceType.TEMPLATE)}>
+                            <Div className="cs-team cs-style1">
+                                <Div className="cs-member_thumb">
+                                    <Image src={template.imgUrl} alt={template.name} layout='responsive' objectFit='cover' width={100} height={120} />
+                                    <Div className="cs-member_overlay" />
+                                </Div>
+                                <Div className="cs-member_info">
+                                    <Div className="cs-member_designation">{template.name}</Div>
+                                </Div>
+                            </Div>
                         </Link>
                         <Spacing lg='80' md='30' />
                     </Div>
                 ))}
             </Div>
-            {/* <ul className="cs-recent_posts">
-                {data?.map((item, index) => (
-                    <li key={index}>
-                        <Div className="cs-recent_post">
-                            <Div className="cs-recent_post_thumb">
-                                <Div className="cs-recent_post_thumb_in cs-bg" style={{ backgroundImage: `url(${item.imgUrl})` }} />
-                            </Div>
-                            <Div className="cs-recent_post_info">
-                                <h3 className="cs-recent_post_title">
-                                    <Link href={item.url} scroll={false} target="_blank">{item.name}</Link>
-                                </h3>
-                                <Div className="cs-recent_post_date cs-primary_40_color">{item.name}</Div>
-                            </Div>
-                        </Div>
-                    </li>
-                ))}
-            </ul> */}
         </>
     )
 }

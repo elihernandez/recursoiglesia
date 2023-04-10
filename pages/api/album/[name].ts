@@ -1,6 +1,5 @@
 import { prisma } from 'api/config/db'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getMultitracksShortener } from '../acortador'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
@@ -21,15 +20,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 export async function getAlbum(artistUrl: string, albumUrl: string) {
     try {
-        const album = await prisma.album.findFirst({
+        return await prisma.album.findFirst({
             where: {
                 AND: [
                     {
-                        url: albumUrl
+                        path: albumUrl
                     },
                     {
                         artist: {
-                            url: artistUrl
+                            path: artistUrl
                         }
                     }
                 ]
@@ -39,25 +38,17 @@ export async function getAlbum(artistUrl: string, albumUrl: string) {
                 multitracks: {
                     select: {
                         id: true,
+                        multitrackId: true,
+                        path: true,
                         name: true,
-                        songId: true,
+                        link: true,
+                        urlDate: true,
                         artist: true,
-                        album: true,
-                        shortener: {
-                            select: {
-                                link: true
-                            }
-                        }
+                        album: true
                     }
                 }
             }
         })
-
-        if (album.multitracks.length != 0 || album?.multitracks) {
-            await getMultitracksShortener(album.multitracks)
-        }
-
-        return album
     } catch (error) {
         console.log(error)
     }

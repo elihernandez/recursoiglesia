@@ -3,7 +3,7 @@ import { Multitrack } from './Multitrack'
 
 export interface Album {
   id?: string
-  url: string
+  path: string
   name: string
   imgUrl: string
   artistId?: string

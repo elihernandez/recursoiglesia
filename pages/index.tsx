@@ -10,11 +10,7 @@ export default function Home(props) {
         {
             name: 'Instagram',
             links: 'https://www.instagram.com/recursoiglesia'
-        },
-        // {
-        //     name: 'Youtube',
-        //     links: '/'
-        // }
+        }
     ]
 
     return (
@@ -29,17 +25,15 @@ export default function Home(props) {
                 <link rel="manifest" href="/site.webmanifest" />
             </Head>
             <main>
-                {/* Start Hero Section */}
                 <Hero
                     title='Recursos para tu iglesia'
-                    subtitle='Aquí encontrarás recursos para tu ministerio, como secuencias, software, plantillas de diseño, fuentes y más, navega y encuentra el contenido que necesitas.'
+                    subtitle='Aquí encontrarás recursos como secuencias, software, plantillas de diseño y más, navega y encuentra el contenido que necesitas.'
                     btnText='Ver recursos'
                     btnLink='/recursos'
                     scrollDownId='#service'
                     socialLinksHeading='Síguenos en'
                     heroSocialLinks={heroSocialLinks}
                 />
-                {/* End Hero Section */}
             </main>
         </>
     )

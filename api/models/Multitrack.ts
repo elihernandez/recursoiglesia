@@ -5,12 +5,15 @@ import { Shortener } from './Shortener'
 
 export interface Multitrack {
   id?: string
+  path?: string
   name: string
-  songId: string
+  multitrackId: string
   shortener?: Shortener
   artistId?: string
   artist?: Artist
   albumId?: string
   album?: Album
-  multitrackRequest: Array<MultitrackRequest>
+  url?: string
+  link?: string
+  multitrackRequest?: Array<MultitrackRequest>
 }

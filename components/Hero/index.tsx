@@ -4,7 +4,7 @@ import Div from '../Div'
 
 export default function Hero({ title, subtitle, btnText, btnLink, scrollDownId, socialLinksHeading, heroSocialLinks }) {
     return (
-        <Div className="cs-hero cs-style1 cs-bg cs-fixed_bg cs-shape_wrap_1" style={{ backgroundImage: 'url(./images/hero_bg.jpeg)' }}>
+        <Div className="cs-hero cs-style1 cs-bg cs-fixed_bg cs-shape_wrap_1" style={{ backgroundImage: 'url(./images/hero_bg-min.webp)' }}>
             <Div className="cs-shape_1" />
             <Div className="cs-shape_1" />
             <Div className="cs-shape_1" />
@@ -12,9 +12,11 @@ export default function Hero({ title, subtitle, btnText, btnLink, scrollDownId, 
                 <Div className="cs-hero_text">
                     <h1 className="cs-hero_title">{title}</h1>
                     <Div className="cs-hero_info">
-                        <Div>
-                            <Button btnLink={btnLink} btnText={btnText} variant={''} />
-                        </Div>
+                        {btnText != '' &&
+                            <Div>
+                                <Button btnLink={btnLink} btnText={btnText} variant={''} />
+                            </Div>
+                        }
                         <Div>
                             <Div className="cs-hero_subtitle">{subtitle}</Div>
                         </Div>

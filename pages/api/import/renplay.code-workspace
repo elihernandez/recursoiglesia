@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../../../../guiahmedia-web"
+		}
+	],
+	"settings": {
+		"WillLuke.nextjs.addTypesOnSave": true,
+		"WillLuke.nextjs.hasPrompted": true
+	}
+}

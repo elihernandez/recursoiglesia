@@ -19,3 +19,7 @@ export function paramToStr(str: string): string {
 function toNormalForm(str) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 }
+
+export function limitStr(str: string, limit: number) {
+    return str.substring(0, limit).concat('...')
+}

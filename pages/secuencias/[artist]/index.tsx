@@ -78,10 +78,14 @@ const AlbumList = ({ artist, albums }: { artist: Artist, albums: Array<Album> })
 }
 
 export async function getStaticPaths() {
-    const artists = await prisma.artist.findMany({})
+    const artists = await prisma.artist.findMany({
+        select: {
+            path: true
+        }
+    })
 
     const paths = artists.map((artist) => ({
-        params: { artist: artist.url },
+        params: { artist: artist.path },
     }))
 
     return { paths, fallback: false }

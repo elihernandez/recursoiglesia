@@ -1,6 +1,6 @@
-import Div from '../Div'
-import axios from 'axios'
+import newsletterSubscriberService from 'api/services/newsletter'
 import { useState } from 'react'
+import Div from '../Div'
 
 export default function Newsletter({ title, subtitle, placeholder }): JSX.Element {
     const [email, setEmail] = useState<string>('')
@@ -10,10 +10,7 @@ export default function Newsletter({ title, subtitle, placeholder }): JSX.Elemen
         e.preventDefault()
 
         try {
-            const response = await axios.post('/api/suscriptor', {
-                email: email
-            })
-
+            const response = await newsletterSubscriberService(email)
             setMessage(response.data.message)
         } catch (e) {
             console.log(e)

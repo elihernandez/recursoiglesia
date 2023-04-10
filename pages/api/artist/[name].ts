@@ -27,10 +27,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 export async function getArtist(artistUrl: string) {
-    console.log(artistUrl)
     return await prisma.artist.findFirst({
         where: {
-            url: artistUrl
+            path: artistUrl
         },
         include: {
             albums: {
