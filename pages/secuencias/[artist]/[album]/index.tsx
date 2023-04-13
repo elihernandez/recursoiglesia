@@ -109,6 +109,7 @@ export async function getStaticProps({ params }) {
         props: {
             artist: album.artist,
             album: JSON.stringify(album)
-        }
+        },
+        revalidate: 60
     }
 }
