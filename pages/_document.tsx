@@ -25,11 +25,7 @@ export default function Document(props) {
                     onError={(e) => { console.error('Script failed to load', e) }}
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
                 />
-                <script async defer data-website-id="24e28ce5-ee59-4637-91a8-8a910c183099" src="https://analytics.recursoiglesia.com/umami.js"></script>
-                {/* <Script
-                    strategy="afterInteractive"
-                    data-website-id="24e28ce5-ee59-4637-91a8-8a910c18309"
-                    src="https://analytics.recursoiglesia.com/umami.js" /> */}
+                <script async src="https://analytics.recursoiglesia.com/script.js" data-website-id="d7aa227a-5446-4145-be2b-a6779cce8796"></script>
             </Head>
             <body>
                 <Main />
