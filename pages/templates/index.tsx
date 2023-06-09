@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from 'react'
 import { limitPageTemplates } from 'api/helpers/constants'
 import FagWidget from 'components/Widget/FaqWidget'
 
-const link = '/plantillas'
+const link = '/templates'
 
 type stateProps = {
     multitracks: Array<Template>,
