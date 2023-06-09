@@ -4,10 +4,11 @@ import { capitalizeFirstLetter } from 'helpers/strings'
 import Link from 'next/link'
 import Image from 'next/image'
 import Div from '../Div'
+import { paths } from 'api/helpers/constants'
 
 interface Props {
-    title: string,
-    artist: Artist,
+    title: string
+    artist: Artist
     data: Array<Album>
 }
 
@@ -24,10 +25,10 @@ export default function AlbumPost({ title, artist, data }: Props) {
                             </Div>
                             <Div className="cs-recent_post_info col">
                                 <h3 className="cs-recent_post_title">
-                                    <Link href={`/secuencias/${artist.path}/${album.path}`} scroll={false}>{album.name}</Link>
+                                    <Link href={`${paths.multitracks}/${artist.path}/${album.path}`} scroll={false}>{album.name}</Link>
                                 </h3>
                                 <Div className="cs-recent_post_date cs-primary_40_color">
-                                    <Link href={`/secuencias/${artist.path}`} scroll={false}>{artist.name}</Link>
+                                    <Link href={`${paths.multitracks}/${artist.path}`} scroll={false}>{artist.name}</Link>
                                 </Div>
                             </Div>
                         </Div>

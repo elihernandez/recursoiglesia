@@ -38,3 +38,5 @@ next-env.d.ts
 bd_tables.xlsx
 sec_data.xlsx
 tem_data.xlsx
+
+/ri_worker

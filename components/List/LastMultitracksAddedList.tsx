@@ -7,6 +7,7 @@ import { PostType2 } from 'components/Post/PostType2'
 import { Multitrack } from 'api/models/Multitrack'
 import downloadService from 'api/services/download'
 import { ResourceType } from 'api/models/ResourceType'
+import { paths } from 'api/helpers/constants'
 
 const LastMultitracksAddedList = () => {
     const { data = [], error, isLoading } = useSWR<Multitrack[], Error>('/api/multitrack/lasts', fetcher)
@@ -34,9 +35,9 @@ const LastMultitracksAddedList = () => {
                     </Link>}
                     subtitle={
                         <>
-                            <Link href={`/secuencias/${multitrack.artist.path}`} scroll={false}>{multitrack.artist.name}</Link>
+                            <Link href={`${paths.multitracks}/${multitrack.artist.path}`} scroll={false}>{multitrack.artist.name}</Link>
                             &nbsp;-&nbsp;
-                            <Link href={`/secuencias/${multitrack.artist.path}/${multitrack.album.path}`} scroll={false}>{multitrack.album.name}</Link>
+                            <Link href={`${paths.multitracks}/${multitrack.artist.path}/${multitrack.album.path}`} scroll={false}>{multitrack.album.name}</Link>
                         </>
                     }
                 />

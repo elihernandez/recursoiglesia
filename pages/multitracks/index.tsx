@@ -1,11 +1,8 @@
 import { limitPageMultitracks, paths } from 'api/helpers/constants'
-import fetcher from 'api/helpers/fetcher'
 import { Multitrack } from 'api/models/Multitrack'
-import axios from 'axios'
 import Div from 'components/Div'
 import LastMultitracksAddedList from 'components/List/LastMultitracksAddedList'
 import MultitracksList from 'components/List/MultitracksList'
-import ProductsList from 'components/List/ProductsList'
 import { LoaderList } from 'components/Loader'
 import PageHeading from 'components/PageHeading'
 import Pagination from 'components/Pagination'
@@ -14,17 +11,12 @@ import Spacing from 'components/Spacing'
 import ArtistTagWidget from 'components/Widget/ArtistTagWidget'
 import FagWidget from 'components/Widget/FaqWidget'
 import SearchWidget from 'components/Widget/SearchWidget'
+import { useFetchData } from 'hooks/useFetchData'
 import { useMediaQueries } from 'hooks/useMediaQueries'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
-
-const link = '/secuencias'
-
-type stateProps = {
-    multitracks: Array<Multitrack>,
-    count: number
-}
+import { useRef } from 'react'
+import { getMultitracksByPage, getMultitracksBySearch } from 'services/multitrack'
 
 export default function SecuenciasPage(props) {
     return (
@@ -50,81 +42,50 @@ export default function SecuenciasPage(props) {
                 <Spacing lg='100' md='50' />
                 <MainContent />
                 <Spacing lg='100' md='50' />
-                <Div className="row">
+                {/* <Div className="row">
                     <Div className="col-lg-12">
                         <ProductsList url='/api/product/all' title="Audífonos in-ear" />
                     </Div>
-                </Div>
+                </Div> */}
                 <FagWidget />
             </Div >
         </>
     )
 }
 
+type Response = {
+    count: number
+    multitracks: Multitrack[]
+}
+
+const MULTITRACKS_BY_PAGE_KEY = 'multitracksByPage'
+
 const MainContent = () => {
     const { isTablet } = useMediaQueries()
     const router = useRouter()
+    const { query, isReady } = router
+    const { page = 1, search = '' } = query
     const timerRef = useRef(null)
 
-    const queryPage: string = router.query?.page as string
-    const querySearch: string = router.query?.search as string
+    const fetcher = search === '' ? getMultitracksByPage : getMultitracksBySearch
+    const queryKey = !isReady ? null : `${MULTITRACKS_BY_PAGE_KEY}-${page}-${search}`
 
-    const [params, setParams] = useState({ page: '', search: '' })
-    const [data, setData] = useState<stateProps>(null)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const { isLoading, data } = useFetchData<Response>(queryKey, () => fetcher(page as string, search as string))
 
     const onChangeText = (text: string) => {
-        setIsLoading(true)
         clearTimeout(timerRef.current)
+        const options = { scroll: false, shallow: true }
+        const query = text == '' ? null : { search: text }
 
         timerRef.current = setTimeout(() => {
-            if (text === '') {
-                router.push(link, {}, {
-                    scroll: false
-                })
-            } else {
-                router.push(link, {
-                    query: {
-                        search: text
-                    }
-                }, {
-                    scroll: false
-                })
-            }
-
-            setParams({
-                page: '1',
-                search: text
-            })
-            setData(null)
+            router.push({
+                pathname: paths.multitracks,
+                query: query
+            }, null, options)
         }, 500)
     }
 
-    useEffect(() => {
-        const getData = async () => {
-            setIsLoading(true)
-            const response = !params.search
-                ? await axios.get(`${paths.api.multitrack}/${params.page ? params.page : 1}`)
-                : await axios.get(`${paths.api.multitrack}/${params.page ? params.page : 1}/${params.search}`)
-
-            setData(response.data)
-            setIsLoading(false)
-        }
-
-        getData()
-        return () => clearTimeout(timerRef.current)
-    }, [params.page, params.search])
-
-    useEffect(() => {
-        if (queryPage) setParams({
-            ...params,
-            page: queryPage
-        })
-        if (querySearch) setParams({
-            ...params,
-            search: querySearch
-        })
-    }, [queryPage, querySearch])
+    if (!isReady) return null
 
     return (
         <>
@@ -138,21 +99,21 @@ const MainContent = () => {
                             />
                         </Div>
                         <Div className="col-12 col-sm-6 col-lg-4">
-                            <SearchWidget onChangeText={onChangeText} placeholder="Buscar..." />
+                            <SearchWidget value={search as string} onChangeText={onChangeText} placeholder="Buscar..." />
                         </Div>
                     </Div>
                 </Div>
             </Div>
             <Spacing lg='100' md='50' />
-            {isLoading
-                ? <LoaderList />
-                : <Div className="row justify-content-between">
+            {isLoading && <LoaderList />}
+            {!isLoading && data &&
+                <Div className="row justify-content-between">
                     <Div className="col-lg-7">
                         {data?.multitracks.length === 0 && data?.count === 0 ?
                             <Div>
-                                No se encontraron resultados {params.search != '' ? `para '${params.search}'` : ''}
+                                No se encontraron resultados {search != '' ? `para '${search}'` : ''}
                             </Div>
-                            : <MultitracksList title={params.search != '' ? `Resultados de '${params.search}'` : 'Secuencias'} data={data?.multitracks} />
+                            : <MultitracksList title={search != '' ? `Resultados de '${search}'` : 'Secuencias'} data={data?.multitracks} />
                         }
                     </Div>
                     {isTablet &&
@@ -167,10 +128,10 @@ const MainContent = () => {
                 {data?.count && !isLoading &&
                     <Div className="col-lg-12">
                         <Pagination
-                            link={link}
+                            link={paths.multitracks}
                             length={data.count}
-                            searchText={params.search}
-                            pageActive={params.page ? parseInt(params.page) : 1}
+                            searchText={search as string}
+                            pageActive={Number(page)}
                             limit={limitPageMultitracks}
                         />
                     </Div>

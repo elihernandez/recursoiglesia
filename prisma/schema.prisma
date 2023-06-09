@@ -117,6 +117,7 @@ model CategoriesOnProduct {
   productId  Int
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
+  createdAt  DateTime @default(now())
 
   @@id([productId, categoryId])
 }

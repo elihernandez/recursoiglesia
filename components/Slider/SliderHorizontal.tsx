@@ -1,5 +1,6 @@
 import Div from 'components/Div'
 import { LoaderList } from 'components/Loader'
+import { useMediaQueries } from 'hooks/useMediaQueries'
 import Image from 'next/image'
 import Link from 'next/link'
 import Slider from 'react-slick'
@@ -15,6 +16,8 @@ type ListHorizontalProps = {
 }
 
 export function SliderHorizontal({ isLoading, error, title, children, data }: ListHorizontalProps) {
+    const { isMobile } = useMediaQueries()
+
     if (error) {
         return null
     }
@@ -66,7 +69,10 @@ export function SliderHorizontal({ isLoading, error, title, children, data }: Li
     }
 
     return (
-        <Div>
+        <Div style={{
+            paddingLeft: !isMobile ? '40px' : 0,
+            paddingRight: !isMobile ? '40px' : 0,
+        }}>
             <h4 className="cs-sidebar_widget_title">{title}</h4>
             <Slider {...settings}>
                 {children}

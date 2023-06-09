@@ -1,5 +1,4 @@
 import { prisma } from 'api/config/db'
-import { paramToStr, strToParam } from 'api/helpers/strings'
 import { Album } from 'api/models/Album'
 import { Artist } from 'api/models/Artist'
 import Div from 'components/Div'
@@ -87,6 +86,7 @@ export async function getStaticPaths() {
     const paths = artists.map((artist) => ({
         params: { artist: artist.path },
     }))
+
 
     return { paths, fallback: false }
 }

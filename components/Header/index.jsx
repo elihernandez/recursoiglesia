@@ -6,6 +6,7 @@ import Div from '../Div'
 import DropDown from './DropDown'
 import imgLogo from 'public/logo_white.png'
 import Image from 'next/image'
+import { paths } from 'api/helpers/constants'
 
 export default function Header() {
     const [isSticky, setIsSticky] = useState(false)
@@ -24,7 +25,7 @@ export default function Header() {
 
     return (
         <>
-            <header className={`cs-site_header cs-style1 text-uppercase cs-sticky_header ${isSticky ? 'cs-sticky_header_active' : ''}`}>
+            <header className={`cs-site_header cs-style1 cs-sticky_header ${isSticky ? 'cs-sticky_header_active' : ''}`}>
                 <Div className="cs-main_header">
                     <Div className="container">
                         <Div className="cs-main_header_in">
@@ -38,12 +39,12 @@ export default function Header() {
                                     <ul className="cs-nav_list" style={{ display: `${mobileToggle ? 'block' : 'none'}` }}>
                                         <li><Link href='/' onClick={() => setMobileToggle(false)}>Inicio</Link></li>
                                         <li className="menu-item-has-children">
-                                            <Link href='/recursos' onClick={() => setMobileToggle(false)}>Recursos</Link>
+                                            <Link href={paths.resources} onClick={() => setMobileToggle(false)}>Recursos</Link>
                                             <DropDown>
                                                 <ul>
-                                                    <li><Link href='/secuencias' onClick={() => setMobileToggle(false)}>Secuencias</Link></li>
-                                                    <li><Link href='/plantillas' onClick={() => setMobileToggle(false)}>Plantillas de diseño</Link></li>
-                                                    <li><Link href='/programas' onClick={() => setMobileToggle(false)}>Programas</Link></li>
+                                                    <li><Link href={paths.multitracks} onClick={() => setMobileToggle(false)}>Secuencias</Link></li>
+                                                    <li><Link href={paths.templates} onClick={() => setMobileToggle(false)}>Plantillas de diseño</Link></li>
+                                                    <li><Link href={paths.softwares} onClick={() => setMobileToggle(false)}>Programas</Link></li>
                                                     {/* <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Fuentes</Link></li>
                                                     <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Plantillas de diseño</Link></li>
                                                     <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Libros</Link></li>
@@ -58,6 +59,16 @@ export default function Header() {
                                 </Div>
                             </Div>
                             <Div className="cs-main_header_right">
+                                {/* <Div className="cs-nav cs-primary_font cs-medium" style={{ marginRight: '40px' }}>
+                                    <ul className="cs-nav_list" style={{ display: `${mobileToggle ? 'block' : 'none'}` }}>
+                                        <li><Link href='/register' onClick={() => setMobileToggle(false)}>Regístrate</Link></li>
+                                        <li><Link href='/login' onClick={() => setMobileToggle(false)}>
+                                            <button className="btn btn-primary"><span>Iniciar sesión</span></button>
+                                        </Link>
+                                        </li>
+                                    </ul>
+                                    <span className={mobileToggle ? 'cs-munu_toggle cs-toggle_active' : 'cs-munu_toggle'} onClick={() => setMobileToggle(!mobileToggle)}><span></span></span>
+                                </Div> */}
                                 <Div className="cs-toolbox">
                                     <span className="cs-icon_btn" onClick={() => setSideHeaderToggle(!sideHeaderToggle)}>
                                         <span className="cs-icon_btn_in">
@@ -82,12 +93,6 @@ export default function Header() {
                     <Link className="cs-site_branding" href="/">
                         <Image priority alt="Logo recursoiglesia" src={imgLogo} width={200} height={93} />
                     </Link>
-                    {/* <Div className="cs-side_header_box">
-            <h2 className="cs-side_header_heading">Do you have a project in your  <br /> mind? Keep connect us.</h2>
-          </Div> */}
-                    {/* <Div className="cs-side_header_box">
-            <ContactInfoWidget title='Contact Us' withIcon />
-          </Div> */}
                     <Div className="cs-side_header_box">
                         <Newsletter
                             title='Suscríbete'

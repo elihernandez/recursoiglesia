@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from 'api/config/db'
-import data from 'data/backup/recursoiglesia.json'
+import data from 'data/backup/recursoiglesia (1).json'
 import { getShortenedUrl } from '../shortener'
 import { ResourceType } from 'api/models/ResourceType'
 import NextCors from 'nextjs-cors'

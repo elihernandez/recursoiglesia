@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Div from '../Div'
 import { Artist } from 'api/models/Artist'
+import { paths } from 'api/helpers/constants'
 
 export default function ArtistTagWidget({ title }) {
     return (
@@ -9,7 +10,7 @@ export default function ArtistTagWidget({ title }) {
             <h4 className="cs-sidebar_widget_title">{title}</h4>
             <Div className="tagcloud">
                 {data?.map((artist: Artist, index: number) =>
-                    <Link href={`/secuencias/${artist.url}`} className="tag-cloud-link" key={artist.url}>{artist.name}</Link>
+                    <Link href={`${paths.multitracks}/${artist.url}`} className="tag-cloud-link" key={artist.url}>{artist.name}</Link>
                 )}
             </Div>
         </>

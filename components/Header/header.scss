@@ -366,11 +366,11 @@
   .cs-site_header.cs-style1 {
     .cs-main_header_center {
       display: flex;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
       height: 100%;
       width: 100%;
-      max-width: calc(100% - 300px);
+      max-width: calc(100% - 500px);
     }
 
     .cs-main_header_left {
@@ -385,7 +385,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6em;
     color: $white;
 

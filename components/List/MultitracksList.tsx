@@ -6,6 +6,7 @@ import Link from 'next/link'
 import useModalStore from 'store/useModalStore'
 import Div from '../Div'
 import { ResourceType } from 'api/models/ResourceType'
+import { paths } from 'api/helpers/constants'
 interface Props {
     title: string
     data: Array<Multitrack>
@@ -35,9 +36,9 @@ export default function MultitracksList({ title, data }: Props) {
                             : `${item.name}`
                         }
                         subtitle={<Div>
-                            <Link href={`/secuencias/${item.artist.path}`} scroll={false}>{item.artist.name}</Link>
+                            <Link href={`${paths.multitracks}/${item.artist.path}`} scroll={false}>{item.artist.name}</Link>
                             &nbsp;-&nbsp;
-                            <Link href={`/secuencias/${item.artist.path}/${item.album.path}`} scroll={false}>{item.album.name}</Link>
+                            <Link href={`${paths.multitracks}/${item.artist.path}/${item.album.path}`} scroll={false}>{item.album.name}</Link>
                         </Div>}
                         buttonAction={
                             <Div style={{ display: 'flex', justifyContent: 'end' }}>

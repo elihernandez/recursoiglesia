@@ -21,11 +21,11 @@ export default function Document(props) {
                     `}
                 </Script>
                 <Script id="Adsense-id" data-ad-client="ca-pub-5669403217581992"
-                    async strategy="afterInteractive"
+                    async
                     onError={(e) => { console.error('Script failed to load', e) }}
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
                 />
-                <script async src="https://analytics.recursoiglesia.com/script.js" data-website-id="d7aa227a-5446-4145-be2b-a6779cce8796"></script>
+                {/* <script async src="https://analytics.recursoiglesia.com/script.js" data-website-id="d7aa227a-5446-4145-be2b-a6779cce8796"></script> */}
             </Head>
             <body>
                 <Main />

@@ -1,5 +1,5 @@
 import { prisma } from 'api/config/db'
-import { paramToStr, strToParam } from 'api/helpers/strings'
+import { strToParam } from 'api/helpers/strings'
 import { Album } from 'api/models/Album'
 import { Multitrack } from 'api/models/Multitrack'
 import Div from 'components/Div'
@@ -14,8 +14,6 @@ import { getAlbum } from 'pages/api/album/[name]'
 export default function AlbumPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
     const artist = props.artist
     const album = JSON.parse(props.album)
-
-    console.log(album)
 
     const getNamesMultitracks = (album: Album) => {
         const arr = []

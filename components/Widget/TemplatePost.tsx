@@ -30,7 +30,7 @@ export default function TemplatePost({ title, data }: Props) {
                                 </Div>
                             </Div>
                         </Link>
-                        <Spacing lg='80' md='30' />
+                        <Spacing lg='30' md='30' />
                     </Div>
                 ))}
             </Div>

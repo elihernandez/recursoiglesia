@@ -28,6 +28,7 @@
           "afterColon": true
         }
       }
-    ]
+    ],
+    "react-hooks/exhaustive-deps": "off"
   }
 }

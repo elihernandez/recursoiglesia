@@ -12,8 +12,9 @@ import { prisma } from 'api/config/db'
 
 const baseLogin = 'https://www.sundaysocial.tv/login/'
 const baseUrl = 'https://www.sundaysocial.tv/browse/page'
-const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
 const arrTemplates = []
+const total = 303
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     await NextCors(req, res, {
@@ -140,9 +141,9 @@ const getData = async () => {
 
     return new Promise(async (resolve, reject) => {
         let index = 0
-        for (const p of pages) {
+        while (index <= total) {
             index++
-            const url = `${baseUrl}/${p}`
+            const url = `${baseUrl}/${index}`
             console.log(url)
             try {
                 var response = await page.goto(url)
@@ -181,11 +182,57 @@ const getData = async () => {
                 console.log(`Ocurrió un problema al buscar información en: ${url}`)
             }
 
-            if (index === pages.length) {
+            if (index === total) {
                 await browser.close()
                 resolve('')
             }
         }
+        // for (const p of pages) {
+        //     index++
+        //     const url = `${baseUrl}/${p}`
+        //     console.log(url)
+        //     try {
+        //         var response = await page.goto(url)
+        //         var body = await response.text()
+
+        //         var { window: { document } } = new jsdom.JSDOM(body)
+
+        //         const templatesPage = document.getElementById('portfolio').querySelectorAll('.element')
+
+        //         for (const template of templatesPage) {
+        //             try {
+        //                 const title = template.children[0].children[0].querySelector('.work-info').querySelector('.vert-center').querySelector('h3').textContent
+        //                 const imgUrl = template.querySelector('img').src
+        //                 const modalId = template.querySelector('a').getAttribute('data-featherlight')
+        //                 await page.click(`a[data-featherlight="${modalId}"]`)
+        //                 const url = document.querySelector(modalId).querySelector('a').href
+
+        //                 const alias = url.split('/')[4].replace(/./g, '')
+        //                 const response = await axios.get(`https://acortaz.net/api?api=6dcb86b1ef0a8448c8143cfb7934bbd5b5ff90e1&url=${url}&alias=${alias}`)
+        //                 const link = response.data.shortenedUrl
+
+        //                 arrTemplates.push({
+        //                     id: uuidv4(),
+        //                     path: '',
+        //                     name: title,
+        //                     imgUrl: imgUrl,
+        //                     url: url,
+        //                     link: link
+        //                 })
+        //             } catch (error) {
+        //                 console.log(error)
+        //             }
+        //         }
+        //     } catch (error) {
+        //         console.log(error)
+        //         console.log(`Ocurrió un problema al buscar información en: ${url}`)
+        //     }
+
+        //     if (index === pages.length) {
+        //         await browser.close()
+        //         resolve('')
+        //     }
+        // }
     })
 }
 
