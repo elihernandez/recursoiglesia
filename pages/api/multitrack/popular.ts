@@ -35,9 +35,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     where: {
                         multitrackId: download.resourceId
                     },
-                    include: {
-                        album: true,
-                        artist: true
+                    select: {
+                        id: true,
+                        multitrackId: true,
+                        path: true,
+                        name: true,
+                        link: true,
+                        urlDate: true,
+                        artist: true,
+                        album: true
                     }
                 })
 

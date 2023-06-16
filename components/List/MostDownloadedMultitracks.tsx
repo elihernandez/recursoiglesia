@@ -1,13 +1,12 @@
+import { paths } from 'api/helpers/constants'
 import fetcher from 'api/helpers/fetcher'
-import { Shortener } from 'api/models/Shortener'
+import { Multitrack } from 'api/models/Multitrack'
+import { ResourceType } from 'api/models/ResourceType'
+import downloadService from 'api/services/download'
+import { PostType2 } from 'components/Post/PostType2'
 import Link from 'next/link'
 import useSWR from 'swr'
 import SliderHorizontal from '../Slider/SliderHorizontal'
-import { PostType2 } from 'components/Post/PostType2'
-import { Multitrack } from 'api/models/Multitrack'
-import downloadService from 'api/services/download'
-import { ResourceType } from 'api/models/ResourceType'
-import { paths } from 'api/helpers/constants'
 
 const MostDownloadedMultitracks = () => {
     const { data = [], error, isLoading } = useSWR<Multitrack[], Error>('/api/multitrack/popular', fetcher)
