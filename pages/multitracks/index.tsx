@@ -2,6 +2,7 @@ import { limitPageMultitracks, paths } from 'api/helpers/constants'
 import { Multitrack } from 'api/models/Multitrack'
 import Div from 'components/Div'
 import LastMultitracksAddedList from 'components/List/LastMultitracksAddedList'
+import MostDownloadedMultitracks from 'components/List/MostDownloadedMultitracks'
 import MultitracksList from 'components/List/MultitracksList'
 import { LoaderList } from 'components/Loader'
 import PageHeading from 'components/PageHeading'
@@ -15,7 +16,7 @@ import { useFetchData } from 'hooks/useFetchData'
 import { useMediaQueries } from 'hooks/useMediaQueries'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getMultitracksByPage, getMultitracksBySearch } from 'services/multitrack'
 
 export default function SecuenciasPage(props) {
@@ -28,12 +29,18 @@ export default function SecuenciasPage(props) {
             <PageHeading
                 title='Secuencias'
                 bgSrc='images/portfolio_hero_bg.jpeg'
-                pageLinkPrev='/recursos'
+                pageLinkPrev={paths.resources}
                 pageTextPrev='Recursos'
                 pageLinkText='Secuencias'
             />
             <Div className="container" id="container">
                 <Spacing lg='100' md='50' />
+                <Div className="row">
+                    <Div className="col-lg-12">
+                        <MostDownloadedMultitracks />
+                    </Div>
+                </Div>
+                <Spacing lg='50' md='50' />
                 <Div className="row">
                     <Div className="col-lg-12">
                         <LastMultitracksAddedList />
@@ -71,6 +78,7 @@ const MainContent = () => {
     const queryKey = !isReady ? null : `${MULTITRACKS_BY_PAGE_KEY}-${page}-${search}`
 
     const { isLoading, data } = useFetchData<Response>(queryKey, () => fetcher(page as string, search as string))
+    const [ready, setReady] = useState(false)
 
     const onChangeText = (text: string) => {
         clearTimeout(timerRef.current)
@@ -85,7 +93,11 @@ const MainContent = () => {
         }, 500)
     }
 
-    if (!isReady) return null
+    useEffect(() => {
+        setReady(isReady)
+    }, [isReady])
+
+    if (!ready) return null
 
     return (
         <>

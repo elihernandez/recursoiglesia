@@ -1,21 +1,22 @@
-import { paths } from 'api/helpers/constants'
 import fetcher from 'api/helpers/fetcher'
-import { Multitrack } from 'api/models/Multitrack'
-import { ResourceType } from 'api/models/ResourceType'
-import downloadService from 'api/services/download'
-import { PostType2 } from 'components/Post/PostType2'
+import { Shortener } from 'api/models/Shortener'
 import Link from 'next/link'
 import useSWR from 'swr'
 import SliderHorizontal from '../Slider/SliderHorizontal'
+import { PostType2 } from 'components/Post/PostType2'
+import { Multitrack } from 'api/models/Multitrack'
+import downloadService from 'api/services/download'
+import { ResourceType } from 'api/models/ResourceType'
+import { paths } from 'api/helpers/constants'
 
-const LastMultitracksAddedList = () => {
-    const { data = [], error, isLoading } = useSWR<Multitrack[], Error>('/api/multitrack/lasts', fetcher)
+const MostDownloadedMultitracks = () => {
+    const { data = [], error, isLoading } = useSWR<Multitrack[], Error>('/api/multitrack/popular', fetcher)
 
     return (
         <SliderHorizontal
             isLoading={isLoading}
             error={error}
-            title="Últimas agregadas"
+            title="Más descargadas"
             data={data}
         >
             {data.map((multitrack: Multitrack) =>
@@ -45,4 +46,4 @@ const LastMultitracksAddedList = () => {
     )
 }
 
-export default LastMultitracksAddedList
+export default MostDownloadedMultitracks

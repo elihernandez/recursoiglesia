@@ -1,8 +1,6 @@
 import Div from 'components/Div'
 import { LoaderList } from 'components/Loader'
 import { useMediaQueries } from 'hooks/useMediaQueries'
-import Image from 'next/image'
-import Link from 'next/link'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'

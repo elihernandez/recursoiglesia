@@ -1,18 +1,25 @@
-import React from 'react'
-import Link from 'next/link'
-import Div from '../Div'
-import { Artist } from 'api/models/Artist'
 import { paths } from 'api/helpers/constants'
+import fetcher from 'api/helpers/fetcher'
+import { Artist } from 'api/models/Artist'
+import { LoaderList } from 'components/Loader'
+import Link from 'next/link'
+import useSWR from 'swr'
+import Div from '../Div'
 
 export default function ArtistTagWidget({ title }) {
+    const { data = [], isLoading } = useSWR<Artist[], Error>('/api/artist/popular', fetcher)
+
     return (
         <>
             <h4 className="cs-sidebar_widget_title">{title}</h4>
-            <Div className="tagcloud">
-                {data?.map((artist: Artist, index: number) =>
-                    <Link href={`${paths.multitracks}/${artist.url}`} className="tag-cloud-link" key={artist.url}>{artist.name}</Link>
-                )}
-            </Div>
+            {isLoading && <LoaderList />}
+            {!isLoading && data.length > 0 &&
+                <Div className="tagcloud">
+                    {data?.map((artist: Artist) =>
+                        <Link key={artist.path} href={`${paths.multitracks}/${artist.path}`} className="tag-cloud-link">{artist.name}</Link>
+                    )}
+                </Div>
+            }
         </>
     )
 }

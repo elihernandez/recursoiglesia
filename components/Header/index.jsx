@@ -44,7 +44,7 @@ export default function Header() {
                                                 <ul>
                                                     <li><Link href={paths.multitracks} onClick={() => setMobileToggle(false)}>Secuencias</Link></li>
                                                     <li><Link href={paths.templates} onClick={() => setMobileToggle(false)}>Plantillas de diseño</Link></li>
-                                                    <li><Link href={paths.softwares} onClick={() => setMobileToggle(false)}>Programas</Link></li>
+                                                    {/* <li><Link href={paths.softwares} onClick={() => setMobileToggle(false)}>Programas</Link></li> */}
                                                     {/* <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Fuentes</Link></li>
                                                     <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Plantillas de diseño</Link></li>
                                                     <li><Link href='/service/service-details' onClick={() => setMobileToggle(false)}>Libros</Link></li>
@@ -61,8 +61,8 @@ export default function Header() {
                             <Div className="cs-main_header_right">
                                 {/* <Div className="cs-nav cs-primary_font cs-medium" style={{ marginRight: '40px' }}>
                                     <ul className="cs-nav_list" style={{ display: `${mobileToggle ? 'block' : 'none'}` }}>
-                                        <li><Link href='/register' onClick={() => setMobileToggle(false)}>Regístrate</Link></li>
-                                        <li><Link href='/login' onClick={() => setMobileToggle(false)}>
+                                        <li><Link href={paths.register} onClick={() => setMobileToggle(false)}>Regístrate</Link></li>
+                                        <li><Link href={paths.login} onClick={() => setMobileToggle(false)}>
                                             <button className="btn btn-primary"><span>Iniciar sesión</span></button>
                                         </Link>
                                         </li>

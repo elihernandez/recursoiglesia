@@ -8,7 +8,7 @@ export const ModalApp = () => {
 
     return (
         <Modal show={isShowModal} onHide={handleCloseModal} centered contentClassName="background-black">
-            <Modal.Header closeButton>
+            <Modal.Header closeButton closeVariant='white'>
                 <Modal.Title style={{ color: 'white' }}>Solicitud de recurso</Modal.Title>
             </Modal.Header>
             <Modal.Body>

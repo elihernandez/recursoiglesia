@@ -23,7 +23,9 @@ export const paths = {
     resources: '/resources',
     multitracks: '/multitracks',
     templates: '/templates',
-    softwares: '/softwares'
+    softwares: '/softwares',
+    login: '/login',
+    register: '/register',
 }
 
 export const isMaintenance = process.env.NEXT_PUBLIC_MANTEINANCE === 'true' ? true : false

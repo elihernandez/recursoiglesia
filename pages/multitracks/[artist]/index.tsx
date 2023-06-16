@@ -1,4 +1,5 @@
 import { prisma } from 'api/config/db'
+import { paths } from 'api/helpers/constants'
 import { Album } from 'api/models/Album'
 import { Artist } from 'api/models/Artist'
 import Div from 'components/Div'
@@ -23,7 +24,7 @@ export default function ArtistPage(props: InferGetStaticPropsType<typeof getStat
             <PageHeading
                 title={artistName}
                 bgSrc='/images/portfolio_hero_bg.jpeg'
-                pageLinkPrev='/secuencias'
+                pageLinkPrev={paths.multitracks}
                 pageTextPrev='Secuencias'
                 pageLinkText={artistName}
             />

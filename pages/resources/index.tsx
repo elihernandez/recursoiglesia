@@ -6,6 +6,7 @@ import Portfolio from 'components/Portfolio'
 import SectionHeading from 'components/SectionHeading'
 import Spacing from 'components/Spacing'
 import FagWidget from 'components/Widget/FaqWidget'
+import { paths } from 'api/helpers/constants'
 
 export default function RecursosPage(props) {
 
@@ -15,24 +16,24 @@ export default function RecursosPage(props) {
         {
             title: 'Secuencias',
             subtitle: 'Ver recurso',
-            href: '/secuencias',
+            href: paths.multitracks,
             src: '/images/recursos_secuencias.jpg',
             category: 'secuencias'
         },
         {
             title: 'Plantillas de diseño',
             subtitle: 'Ver recurso',
-            href: '/plantillas',
+            href: paths.templates,
             src: '/images/recursos_plantillas.jpg',
             category: 'plantillas'
         },
-        {
-            title: 'Programas',
-            subtitle: 'Ver recurso',
-            href: '/programas',
-            src: '/images/recursos_programas.jpg',
-            category: 'programas'
-        }
+        // {
+        //     title: 'Programas',
+        //     subtitle: 'Ver recurso',
+        //     href: '/programas',
+        //     src: '/images/recursos_programas.jpg',
+        //     category: 'programas'
+        // }
     ]
 
 

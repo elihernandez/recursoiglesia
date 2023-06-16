@@ -1,4 +1,5 @@
 import { prisma } from 'api/config/db'
+import { paths } from 'api/helpers/constants'
 import { strToParam } from 'api/helpers/strings'
 import { Album } from 'api/models/Album'
 import { Multitrack } from 'api/models/Multitrack'
@@ -34,7 +35,7 @@ export default function AlbumPage(props: InferGetStaticPropsType<typeof getStati
             <PageHeading
                 title={album.name}
                 bgSrc='/images/portfolio_hero_bg.jpeg'
-                pageLinkPrev={`/secuencias/${strToParam(artist.name)}`}
+                pageLinkPrev={`${paths.multitracks}/${strToParam(artist.name)}`}
                 pageTextPrev={artist.name}
                 pageLinkText={album.name}
             />

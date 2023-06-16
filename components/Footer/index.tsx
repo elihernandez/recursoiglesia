@@ -1,4 +1,4 @@
-import { isMaintenance } from 'api/helpers/constants'
+import { isMaintenance, paths } from 'api/helpers/constants'
 import Div from '../Div'
 import MenuWidget from '../Widget/MenuWidget'
 import Newsletter from '../Widget/Newsletter'
@@ -9,16 +9,16 @@ export default function Footer() {
     const serviceMenu = [
         {
             title: 'Secuencias',
-            href: '/secuencias'
+            href: paths.multitracks
         },
         {
             title: 'Plantillas de diseño',
-            href: '/plantillas'
+            href: paths.templates
         },
-        {
-            title: 'Programas',
-            href: '/programas'
-        }
+        // {
+        //     title: 'Programas',
+        //     href: '/programas'
+        // }
     ]
 
     const mainMenu = [
